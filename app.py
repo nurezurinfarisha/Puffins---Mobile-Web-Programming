@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home():  # put application's code here
-    return render_template('quiz.html')
+def home():  
+    return render_template('index.html')
 
 
 @app.route('/login')
