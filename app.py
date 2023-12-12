@@ -20,12 +20,12 @@ def register():
 
 @app.route('/pengajaran')
 def pengajaran():
-    return render_template('courses.html')
+    return render_template('pengajaran.html')
 
 
 @app.route('/latihan')
 def latihan():
-    return render_template('about.html')
+    return render_template('latihan.html')
 
 
 @app.route('/kuiz')
