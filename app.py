@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home():  
+def home():
     return render_template('index.html')
 
 
@@ -21,6 +21,16 @@ def register():
 @app.route('/pengajaran')
 def pengajaran():
     return render_template('pengajaran.html')
+
+
+@app.route('/ukuran_asas')
+def ukuran_asas():
+    return render_template('ukuran_asas.html')
+
+
+@app.route('/faktor_algebra')
+def faktor_algebra():
+    return render_template('faktor_algebra.html')
 
 
 @app.route('/latihan')
