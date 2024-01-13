@@ -1,0 +1,6 @@
+.mascot{
+    position: fixed;
+    z-index: 99;
+    left: 20px;
+    bottom: -20px;
+}
