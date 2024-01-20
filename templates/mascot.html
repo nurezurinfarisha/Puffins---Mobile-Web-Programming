@@ -1,9 +1,16 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
 <div class="mascot">
 <a title="mascot" href="#" onclick="popAlert()"><img src="../static/img/mascot/2.png" alt="Mascot" width="100px" height="100px"></a>
-<div class="talk-bubble tri-left round right-in">
+<div class="talk-bubble tri-left round right-in" height="100px" style="background-color: beige;">
     <div class="talktext">
-        <p>Mdawsda</p>
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+
     </div>
 </div>
 <!--img src="../static/img/mascot/2.png" alt="Mascot" width="100px" height="100px"-->
 </div>
+{% endif %}
+{% endwith %}
