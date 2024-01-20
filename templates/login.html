@@ -42,20 +42,20 @@
 
     <main class="login-body" data-vide-bg="../static/img/login-bg.mp4">
         <!-- Login Admin -->
-        <form class="form-default" action="login" method="POST">
+        <form class="form-default" action="{{url_for('login')}}" method="POST">
             
             <div class="login-form">
                 <!-- logo-login -->
                 <div class="logo-login">
-                    <a href="/index"><img src="../static/img/logo/loder.png" alt=""></a>
+                    <img src="../static/img/logo/loder.png" alt="">
                 </div>
                 <h2>Login Here</h2>
                 <div class="form-input">
-                    <label for="name">Email</label>
+                    <label for="email">Email</label>
                     <input  type="email" name="email" placeholder="Email">
                 </div>
                 <div class="form-input">
-                    <label for="name">Password</label>
+                    <label for="password">Password</label>
                     <input type="password" name="password" placeholder="Password">
                 </div>
                 <div class="form-input pt-30">
@@ -63,7 +63,7 @@
                 </div>
                 
                 <!-- Forget Password -->
-                <a href="#" class="forget">Forget Password</a>
+                <!-- <a href="#" class="forget">Forget Password</a> -->
                 <!-- Forget Password -->
                 <a href="/register" class="registration">Registration</a>
             </div>
