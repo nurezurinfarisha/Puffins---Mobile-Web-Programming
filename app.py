@@ -4,15 +4,16 @@ from sqlite3 import Error
 import sqlite3
 import uuid
 
-
 app = Flask(__name__)
 # app.secret_key = 'puffin'
 sess = Session()
+
+
 # SESSION_TYPE = 'yeet'
 # app.config.from_object(__name__)
 # Session(app)
 
-#Database Connection
+# Database Connection
 def create_connection():
     conn = None
     try:
@@ -22,6 +23,7 @@ def create_connection():
         print(e)
 
     return conn
+
 
 conn = create_connection()
 cur = conn.cursor()
@@ -38,7 +40,7 @@ pswrd TEXT
 # Execute the table creation query
 cur.execute(user_creation_query)
 
-#---------TODO------------
+# ---------TODO------------
 # SCORE TABLE FOR QUIZ
 # FLIPCARD TABLE
 # NOTES TABLE
@@ -49,12 +51,13 @@ conn.commit()
 conn.close()
 
 
-#-----------Routing----------------
+# -----------Routing----------------
 @app.route('/')
 def start():
     session['current_user'] = None
     session['logged_in'] = False
     return redirect(url_for("login"))
+
 
 @app.route('/home')
 def home():
@@ -81,7 +84,7 @@ def login():
             # Authentication successful, redirect to a logged-in page
             session['logged_in'] = True
             session['current_user'] = user[0]
-            
+
             print(session['logged_in'])
             print(session['current_user'])
             return redirect(url_for('home', user=session['current_user'], logged_in=session['logged_in']))
@@ -91,11 +94,13 @@ def login():
 
     return render_template('login.html', user=session['current_user'], logged_in=session['logged_in'])
 
+
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['current_user'] = None
     session['logged_in'] = False
     return redirect(url_for("login"))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -122,7 +127,8 @@ def register():
 
         return render_template('login.html')
 
-    return render_template('register.html') 
+    return render_template('register.html')
+
 
 @app.route('/pengajaran')
 def pengajaran():
