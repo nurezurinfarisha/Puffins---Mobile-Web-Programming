@@ -1,4 +1,4 @@
-/* Style.css */
+/* Style.css
 
 * {
 	font-family: Georgia, Times, "Times New Roman", serif;
@@ -111,4 +111,122 @@ liKuiz:nth-child(odd) {
 	.scores {
 		max-width: 90%;
 	}
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+/* * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+} */
+
+/* body {
+    background-color: rgb(73, 230, 236);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.quizcontainer {
+    background-color: aliceblue;
+    transition: 1s ease;
+    width: 80%;
+    max-width: 40rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 1rem 1rem 10rem 2rem rgb(0 0 0 / 0.25);
+    padding: 2.5rem;
+}
+
+.question-card {
+    background-color: rgb(244, 206, 255);
+    border-radius: 1rem;
+    margin: 2rem auto;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.answer-card {
+    padding: 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+button.quiz {
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    background-color: rgba(226, 226, 226, 0.78);
+	color: black;
+    margin: 0.5rem 0;
+    padding: 1rem 0;
+}
+
+button:hover.quiz {
+    background-color: rgba(33, 33, 33, 0.586);
+	color: rgb(255, 221, 253);
+}
+
+.game-data {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#start-game,
+#end-game {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    column-gap: 2rem;
+}
+
+#start-btn,
+#restart-btn {
+    cursor: pointer;
+    border-radius: 1rem;
+    margin: 2rem auto 1rem;
+    padding: 1rem 3rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background-color: rgb(64, 107, 226);
+}
+
+#in-game,
+#end-game {
+    display: none;
+}
+
+#start-game>p {
+    margin: 2rem auto;
+}
+
+#timer {
+    display: none;
+    text-align: left;
+    height: 0.5rem;
+    width: 100%;
+    background-color: rgb(250, 250, 250);
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+#progress {
+    transition: ease;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+#message {
+    font-size: 1.5rem;
 }
