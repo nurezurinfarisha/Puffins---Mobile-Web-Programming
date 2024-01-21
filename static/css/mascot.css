@@ -7,8 +7,7 @@
 
 /* General CSS Setup */
 body{
-    background-color: lightblue;
-    font-family: "Ubuntu-Italic", "Lucida Sans", helvetica, sans;
+    font-family: "Ubuntu-Italic", "Lucida Sans", helvetica, sans, serif;
   }
   
   /* container */

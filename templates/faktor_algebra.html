@@ -1,76 +1,157 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link href="../static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../static/css/templatemo-topic-listing.css" rel="stylesheet">
+
+
+    <body id="top">
+
     <main>
-        {% include 'mascot.html' %}
-        <!--? slider Area Start-->
-        <section class="slider-area slider-area2">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <div class="single-slider slider-height2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-11 col-md-12">
-                                <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Pemfaktoran & Algebra</h1>
-                                    <!-- breadcrumb Start-->
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="/pengajaran">Pengajaran</a></li>
-                                        </ol>
-                                    </nav>
-                                    <!-- breadcrumb End -->
-                                </div>
-                            </div>
+
+
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class="col-lg-5 col-12 mb-5">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item" aria-current="page"><a href="/pengajaran">Pengajaran</a></li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Pemfaktoran & Algebra</li>
+                            </ol>
+                        </nav>
+
+                        <h2 class="text-white">Pemfaktoran & Algebra</h2>
+
+                    </div>
+
+                    <div class="col-lg-5 col-12">
+                        <div class="topics-detail-block bg-white shadow-lg">
+                            <img src="../static/img/teaching/faktor_algebra_profile.png" class="topics-detail-block-image img-fluid" alt="">
                         </div>
                     </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <section class="topics-detail-section section-padding" id="topics-detail">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 col-12 m-auto">
+                        <h3 class="mb-4">Introduction to Web Design</h3>
+
+                        <p>So how can you stand out, do something unique and interesting, build an online business, and get paid enough to change
+                            life.
+                            Please visit TemplateMo website to download free website templates.</p>
+
+                        <p><strong>There are so many ways to make money online</strong>. Below are several platforms you can use to find success. Keep
+                            in
+                            mind that there is no one path everyone can take. If that were the case, everyone would have a million dollars.</p>
+
+                        <section class="carousel c" aria-label="Gallery">
+                            <ol class="carousel__viewport">
+                                <li id="carousel__slide1"
+                                    tabindex="0"
+                                    class="carousel__slide">
+                                    <img src="../static/img/teaching/material-algebra-1.png" alt="Description of Image 1">
+                                    <div class="carousel__snapper">
+                                        <a href="#carousel__slide4"
+                                           class="carousel__prev">Go to last slide</a>
+                                        <a href="#carousel__slide2"
+                                           class="carousel__next">Go to next slide</a>
+                                    </div>
+                                </li>
+                                <li id="carousel__slide2"
+                                    tabindex="0"
+                                    class="carousel__slide">
+                                    <img src="../static/img/teaching/material-algebra-2.png" alt="Description of Image 1">
+                                    <div class="carousel__snapper"></div>
+                                    <a href="#carousel__slide1"
+                                       class="carousel__prev">Go to previous slide</a>
+                                    <a href="#carousel__slide3"
+                                       class="carousel__next">Go to next slide</a>
+                                </li>
+                                <li id="carousel__slide3"
+                                    tabindex="0"
+                                    class="carousel__slide">
+                                    <img src="../static/img/teaching/material-algebra-3.png" alt="Description of Image 1">
+                                    <div class="carousel__snapper"></div>
+                                    <a href="#carousel__slide2"
+                                       class="carousel__prev">Go to previous slide</a>
+                                    <a href="#carousel__slide4"
+                                       class="carousel__next">Go to next slide</a>
+                                </li>
+                                <li id="carousel__slide4"
+                                    tabindex="0"
+                                    class="carousel__slide">
+                                    <img src="../static/img/teaching/material-2.png" alt="Description of Image 1">
+                                    <div class="carousel__snapper"></div>
+                                    <a href="#carousel__slide3"
+                                       class="carousel__prev">Go to previous slide</a>
+                                    <a href="#carousel__slide1"
+                                       class="carousel__next">Go to first slide</a>
+                                </li>
+                            </ol>
+                            <aside class="carousel__navigation">
+                                <ol class="carousel__navigation-list">
+                                    <li class="carousel__navigation-item">
+                                        <a href="#carousel__slide1"
+                                           class="carousel__navigation-button">Go to slide 1</a>
+                                    </li>
+                                    <li class="carousel__navigation-item">
+                                        <a href="#carousel__slide2"
+                                           class="carousel__navigation-button">Go to slide 2</a>
+                                    </li>
+                                    <li class="carousel__navigation-item">
+                                        <a href="#carousel__slide3"
+                                           class="carousel__navigation-button">Go to slide 3</a>
+                                    </li>
+                                    <li class="carousel__navigation-item">
+                                        <a href="#carousel__slide4"
+                                           class="carousel__navigation-button">Go to slide 4</a>
+                                    </li>
+                                </ol>
+                            </aside>
+                        </section>
+
+                        <blockquote>
+                            Freelancing your skills isn’t going to make you a millionaire overnight.
+                        </blockquote>
+
+                        <div class="row my-4">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <img src="../static/img/teaching/material-1.png" class="topics-detail-block-image img-fluid" alt="">
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-lg-0 mt-md-0">
+                                <img src="../static/img/teaching/material-2.png" class="topics-detail-block-image img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <p>Most people start with freelancing skills they already have as a side hustle to build up income. This extra cash can be
+                            used
+                            for a vacation, to boost up savings, investing, build business.</p>
+                    </div>
+
                 </div>
             </div>
         </section>
-        <!-- Courses area start -->
-        <div class="courses-area section-padding40 fix">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-9 col-lg-10">
-                        <div class="section-tittle text-center mb-20">
-                            <h2>Pemfaktoran & Algebra</h2>
-                        </div>
-
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel"
-                                    data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel"
-                                    data-slide-to="1"></li>
-                                <li data-target="#myCarousel"
-                                    data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="overlay-image" style="background-image: url(static/img/teaching/material-algebra-1.png);"></div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="overlay-image" style="background-image: url(static/img/teaching/material-algebra-2.png);"></div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="overlay-image" style="background-image: url(static/img/teaching/material-algebra-3.png);"></div>
-                                </div>
-                            </div>
-                            <a href="#myCarousel" class="carousel-control-prev" role="button" data-slide="prev">
-                                <span class="sr-only">Previous</span>
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </a>
-                            <a href="#myCarousel" class="carousel-control-next" role="button" data-slide="prev">
-                                <span class="sr-only">Previous</span>
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </main>
+
 {% endblock %}
