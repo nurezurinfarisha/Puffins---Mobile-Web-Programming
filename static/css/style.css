@@ -150,17 +150,6 @@ p {
     font-weight: normal
 }
 
-.bg-img-1 {
-    background-image: url(../img/slider/slider-img-1.jpg)
-}
-
-.bg-img-2 {
-    background-image: url(../img/background-img/bg-img-2.jpg)
-}
-
-.cta-bg-1 {
-    background-image: url(../img/background-img/bg-img-3.jpg)
-}
 
 .img {
     max-width: 100%;
@@ -4215,7 +4204,7 @@ hr {
     height: 100%;
     width: 100%;
     content: "";
-    background-color: rgba(66,85,164,0.7);
+    background-color: rgba(0,0,0,0.7);
     opacity: 0;
     z-index: 1;
     -webkit-transition: .4s;
@@ -4235,7 +4224,8 @@ hr {
 }
 
 .topic-area .single-topic .topic-img img {
-    width: 100%
+    width: 100%;
+    border-radius: 15px;
 }
 
 .topic-area .single-topic .topic-content-box {
@@ -4260,21 +4250,80 @@ hr {
     text-align: center
 }
 
-.topic-area .single-topic .topic-content-box .topic-content h3 a {
-    color: #ffffff;
+/* Style for the h3 element */
+#panjangModalTrigger {
+    color: #ffffff; /* White text color */
     font-weight: 700;
-    font-size: 20px;
+    font-size: 70px;
     margin-bottom: 0px;
     text-transform: uppercase;
-    text-decoration: underline #fff transparent;
-    -webkit-transition: .4s;
-    -moz-transition: .4s;
-    -o-transition: .4s;
-    transition: .4s
+    text-decoration: underline transparent;
+    transition: opacity 0.5s ease, color 0.4s, font-size 0.4s; /* Transition for opacity, color, and font-size */
+    opacity: 0; /* Initially invisible */
+    text-align: center;
+    line-height: 50px; /* Align text vertically */
 }
 
-.topic-area .single-topic .topic-content-box .topic-content h3 a:hover {
-    text-decoration: underline
+/* Change the opacity to 1 (visible) when hovering over the h3 element */
+#panjangModalTrigger:hover {
+    opacity: 1;
+}
+
+/* Style for the h3 element */
+#isipaduModalTrigger {
+    color: #ffffff; /* White text color */
+    font-weight: 700;
+    font-size: 70px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    text-decoration: underline transparent;
+    transition: opacity 0.5s ease, color 0.4s, font-size 0.4s; /* Transition for opacity, color, and font-size */
+    opacity: 0; /* Initially invisible */
+    text-align: center;
+    line-height: 50px; /* Align text vertically */
+}
+
+/* Change the opacity to 1 (visible) when hovering over the h3 element */
+#isipaduModalTrigger:hover {
+    opacity: 1;
+}
+
+/* Style for the h3 element */
+#beratModalTrigger {
+    color: #ffffff; /* White text color */
+    font-weight: 700;
+    font-size: 70px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    text-decoration: underline transparent;
+    transition: opacity 0.5s ease, color 0.4s, font-size 0.4s; /* Transition for opacity, color, and font-size */
+    opacity: 0; /* Initially invisible */
+    text-align: center;
+    line-height: 50px; /* Align text vertically */
+}
+
+/* Change the opacity to 1 (visible) when hovering over the h3 element */
+#beratModalTrigger:hover {
+    opacity: 1;
+}
+
+/* Style for the h3 element */
+#suhuModalTrigger {
+    color: #ffffff; /* White text color */
+    font-weight: 700;
+    font-size: 70px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    text-decoration: underline transparent;
+    transition: opacity 0.5s ease, color 0.4s, font-size 0.4s; /* Transition for opacity, color, and font-size */
+    opacity: 0; /* Initially invisible */
+    text-align: center;
+    line-height: 50px; /* Align text vertically */
+}
+
+/* Change the opacity to 1 (visible) when hovering over the h3 element */
+#suhuModalTrigger:hover {
+    opacity: 1;
 }
 
 .topic-area .single-topic .topic-content-box .topic-content p {
@@ -7482,4 +7531,78 @@ ol, li {
 
 .carousel::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+
+/* Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* High value to ensure it sits on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative; /* Relative positioning */
+    background-color: rgba(255,255,255);
+    margin: 5% auto; /* Margin to the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Adjust as needed */
+    height: 80%; /* Adjust as needed */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    position: absolute; /* Absolute positioning */
+    top: 10px; /* Position from the top */
+    right: 10px; /* Position from the right */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Iframe styling */
+#panjangModalVideo {
+    width: 100%; /* Full width of modal content */
+    height: 90%; /* Height adjusted for modal content */
+    border: none; /* Remove border */
+    margin-top: 30px; /* Add margin at the top to push it down */
+}
+
+/* Iframe styling */
+#isipaduModalVideo {
+    width: 100%; /* Full width of modal content */
+    height: 90%; /* Height adjusted for modal content */
+    border: none; /* Remove border */
+    margin-top: 30px; /* Add margin at the top to push it down */
+}
+
+/* Iframe styling */
+#beratModalVideo {
+    width: 100%; /* Full width of modal content */
+    height: 90%; /* Height adjusted for modal content */
+    border: none; /* Remove border */
+    margin-top: 30px; /* Add margin at the top to push it down */
+}
+
+/* Iframe styling */
+#suhuModalVideo {
+    width: 100%; /* Full width of modal content */
+    height: 90%; /* Height adjusted for modal content */
+    border: none; /* Remove border */
+    margin-top: 30px; /* Add margin at the top to push it down */
 }

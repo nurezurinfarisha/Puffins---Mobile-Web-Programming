@@ -554,12 +554,12 @@ pre code {
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Center the items horizontally */
-  align-items: center; /* Center the items vertically */
-  margin-right: -15px;
-  margin-left: -15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+    margin-right: -15px;
+    margin-left: -15px;
 }
 
 

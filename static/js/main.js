@@ -443,24 +443,70 @@
     $('#bar5').barfiller();
     $('#bar6').barfiller();
 
-    $(document).ready(function() {
-    // Handle tab clicks
-    $('.tab').click(function() {
-        // Remove active class from all tabs
-        $('.tab').removeClass('active');
-        // Add active class to the clicked tab
-        $(this).addClass('active');
+    $(document).ready(function () {
+        // Handle tab clicks
+        $('.tab').click(function () {
+            // Remove active class from all tabs
+            $('.tab').removeClass('active');
+            // Add active class to the clicked tab
+            $(this).addClass('active');
 
-        // Hide all course content
-        $('.course-content').removeClass('active');
+            // Hide all course content
+            $('.course-content').removeClass('active');
 
-        // Get the ID of the clicked tab
-        var courseId = $(this).text().toLowerCase().replace(' ', '-');
+            // Get the ID of the clicked tab
+            var courseId = $(this).text().toLowerCase().replace(' ', '-');
 
-        // Show the corresponding course content
-        $('#' + courseId + '-content').addClass('active');
+            // Show the corresponding course content
+            $('#' + courseId + '-content').addClass('active');
+        });
     });
-});
+
+// Function to open modals
+function openModal(modalId, videoUrl) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+    document.getElementById(modalId + "Video").src = videoUrl;
+}
+
+document.getElementById("panjangModalTrigger").onclick = function () {
+    openModal("panjangModal", "https://www.youtube.com/embed/LRFpOIN7tI0");
+};
+
+document.getElementById("isipaduModalTrigger").onclick = function () {
+    openModal("isipaduModal", "https://www.youtube.com/embed/hqlgPM2rjao");
+};
+
+document.getElementById("beratModalTrigger").onclick = function () {
+    openModal("beratModal", "https://www.youtube.com/embed/A0DdQe66_aY");
+};
+
+document.getElementById("suhuModalTrigger").onclick = function () {
+    openModal("suhuModal", "https://www.youtube.com/embed/Q48kxEzwubQ");
+};
+
+// Function to close modals
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+    document.getElementById(modalId + "Video").src = "";
+}
+
+var closeButtons = document.getElementsByClassName("close");
+for (var i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].onclick = function () {
+        var modalId = this.closest(".modal").id;
+        closeModal(modalId);
+    };
+}
+
+// Function to close the modal when clicking outside of it
+window.onclick = function (event) {
+    if (event.target.classList.contains('modal')) {
+        closeModal(event.target.id);
+    }
+};
+
 
 
 })(jQuery);

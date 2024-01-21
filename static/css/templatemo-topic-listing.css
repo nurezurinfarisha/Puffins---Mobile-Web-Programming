@@ -655,7 +655,7 @@ strong {
 }
 
 blockquote {
-  background-color: var(--section-bg-color);
+  background: linear-gradient(45deg, #ff69b4, #8a2be2);
   border-radius: var(--border-radius-small);
   font-family: var(--title-font-family);
   font-size: var(--h4-font-size);
@@ -664,6 +664,7 @@ blockquote {
   text-align: center;
   margin: 30px;
   padding: 40px;
+  color: #FFFFFF;
 }
 
 .topics-listing-page .site-header {
