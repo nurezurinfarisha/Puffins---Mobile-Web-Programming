@@ -155,8 +155,23 @@ def latihan():
 
 @app.route('/kuiz')
 def kuiz():
-    return render_template('quiz.html')
+    return render_template('quizAlg.html')
 
+@app.route('/kuizAlg')
+def kuizAlg():
+    return render_template('quizAlg.html')
+
+@app.route('/kuizAlgE')
+def kuizAlgE():
+    return render_template('quizAlgEasy.html')
+
+@app.route('/kuizAlgM')
+def kuizAlgM():
+    return render_template('quizAlgMed.html')
+
+@app.route('/kuizAlgH')
+def kuizAlgH():
+    return render_template('quizAlgHard.html')
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
