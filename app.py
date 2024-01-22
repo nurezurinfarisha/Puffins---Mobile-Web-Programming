@@ -55,17 +55,15 @@ conn.close()
 
 
 # -----------Routing----------------
-@app.route('/')
-def start():
-    session['current_user'] = None
-    session['logged_in'] = False
-    return redirect(url_for("login"))
-
-
 @app.route('/home')
 def home():
     flash('Welcome back!')
-    return render_template('index.html', username=session['username'])
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('index.html', username=session['username'], user=user)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
