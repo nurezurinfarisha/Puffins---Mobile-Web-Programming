@@ -2484,7 +2484,7 @@ hr {
 }
 
 .footer-padding {
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 13px
 }
 
@@ -2857,7 +2857,8 @@ hr {
 .main-header ul > li:hover > ul.submenu {
     visibility: visible;
     opacity: 1;
-    top: 100%
+    top: 100%;
+    border-radius: 10px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -7730,11 +7731,13 @@ ol, li {
 h2.mb-4 {
     font-family: 'Tangerine', cursive; /* Replace with the name of the font you chose */
     font-size: 80px;
+    color: #4255A4;
 }
 
 h2.mb-4a {
     font-family: 'Tangerine', cursive; /* Replace with the name of the font you chose */
     font-size: 70px;
+    color: #4255A4;
 }
 
 h3.mb-4 {

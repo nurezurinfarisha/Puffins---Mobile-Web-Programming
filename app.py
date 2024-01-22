@@ -4,16 +4,17 @@ from sqlite3 import Error
 import sqlite3
 from werkzeug.utils import secure_filename
 import os
+from flask_login import LoginManager, login_required, UserMixin, login_user, logout_user
 import uuid
 
 app = Flask(__name__)
 # app.secret_key = 'puffin'
 sess = Session()
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-# SESSION_TYPE = 'yeet'
-# app.config.from_object(__name__)
-# Session(app)
 
 # Database Connection
 def create_connection():
@@ -54,8 +55,14 @@ conn.commit()
 conn.close()
 
 
+@app.route('/')
+def landing():
+    return render_template('landing.html')
+
+
 # -----------Routing----------------
 @app.route('/home')
+@login_required
 def home():
     flash('Welcome back!')
     conn = create_connection()
@@ -64,6 +71,28 @@ def home():
     user = cur.fetchone()
     return render_template('index.html', username=session['username'], user=user)
 
+
+from flask_login import UserMixin
+
+
+class User(UserMixin):
+    def __init__(self, email, fullname, username, pswrd, profile_image='default.jpg'):
+        self.id = email
+        self.fullname = fullname
+        self.username = username
+        self.pswrd = pswrd
+        self.profile_image = profile_image
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (user_id,))
+    user = cur.fetchone()
+    if user:
+        return User(*user)
+    return None
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -89,6 +118,7 @@ def login():
 
             print(session['logged_in'])
             print(session['current_user'])
+            login_user(User(*user))
             return redirect(url_for('home', user=session['current_user'], username=session['username'], logged_in=session['logged_in']))
 
     # If the request method is GET or the authentication failed, handle this situation
@@ -100,6 +130,7 @@ def login():
 def logout():
     session['current_user'] = None
     session['logged_in'] = False
+    logout_user()
     return redirect(url_for("login"))
 
 
@@ -132,6 +163,7 @@ def register():
 
 
 @app.route('/pengajaran')
+@login_required
 def pengajaran():
     flash('Jom Belajar!')
     conn = create_connection()
@@ -142,6 +174,7 @@ def pengajaran():
 
 
 @app.route('/ukuran_asas')
+@login_required
 def ukuran_asas():
     flash('Apakah Itu Ukuran Asas?')
     conn = create_connection()
@@ -152,6 +185,7 @@ def ukuran_asas():
 
 
 @app.route('/faktor_algebra')
+@login_required
 def faktor_algebra():
     flash('Y+3=10. Apakah Y?')
     conn = create_connection()
@@ -162,6 +196,7 @@ def faktor_algebra():
 
 
 @app.route('/latihan')
+@login_required
 def latihan():
     conn = create_connection()
     cur = conn.cursor()
@@ -171,6 +206,7 @@ def latihan():
 
 
 @app.route('/kuiz')
+@login_required
 def kuiz():
     conn = create_connection()
     cur = conn.cursor()
@@ -178,7 +214,9 @@ def kuiz():
     user = cur.fetchone()
     return render_template('quizAlg.html', username=session['username'], user=user)
 
+
 @app.route('/kuizAlg')
+@login_required
 def kuizAlg():
     conn = create_connection()
     cur = conn.cursor()
@@ -188,6 +226,7 @@ def kuizAlg():
 
 
 @app.route('/kuizAlgE')
+@login_required
 def kuizAlgE():
     conn = create_connection()
     cur = conn.cursor()
@@ -197,6 +236,7 @@ def kuizAlgE():
 
 
 @app.route('/kuizAlgM')
+@login_required
 def kuizAlgM():
     conn = create_connection()
     cur = conn.cursor()
@@ -206,6 +246,7 @@ def kuizAlgM():
 
 
 @app.route('/kuizAlgH')
+@login_required
 def kuizAlgH():
     conn = create_connection()
     cur = conn.cursor()
@@ -215,6 +256,7 @@ def kuizAlgH():
 
 
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     conn = create_connection()
     cur = conn.cursor()
@@ -249,7 +291,6 @@ def profile():
 
     # Pass the user's data to the template
     return render_template('profile.html', user=user)
-
 
 
 if __name__ == '__main__':
