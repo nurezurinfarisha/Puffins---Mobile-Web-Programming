@@ -74,22 +74,21 @@
                                         </li>
                                         <li><a href="/latihan">Latihan</a></li>
                                         <li><a href="/kuiz">Kuiz</a></li>
-                                        <li class="button-header margin-left "><a href="{{ url_for('logout') }}"
-                                                                                  class="btn">Logout</a>
-                                        </li>
-                                        <!-- Button -->
-                                        <!-- <li class="button-header margin-left "><a href="#"
-                                                                                  class="btn">Join</a>
-                                        </li>
-                                        <li class="button-header"><a href="/login"
-                                                                     class="btn btn3">Log in</a>
-                                        </li> -->
 
+                                        <!-- Profile image -->
+                                        <li>
+                                            <a href="/profile">
+                                                <img src="{{ url_for('static', filename='img/hero/' + user[4]) }}" alt="Profile"
+                                                     class="profile-image">
+                                            </a>
+                                        </li>
+                                        <li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
+
                     <!-- Mobile Menu -->
                     <div class="col-12">
                         <div class="mobile_menu d-block d-lg-none"></div>

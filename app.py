@@ -2,6 +2,8 @@ from flask import Flask, request, redirect, render_template, flash, url_for, ses
 from flask_session import Session
 from sqlite3 import Error
 import sqlite3
+from werkzeug.utils import secure_filename
+import os
 import uuid
 
 app = Flask(__name__)
@@ -34,22 +36,12 @@ CREATE TABLE IF NOT EXISTS user (
 email TEXT PRIMARY KEY,
 fullname TEXT,
 username TEXT,
-pswrd TEXT
-);
-'''
-
-leaderboard_creation_query = '''
-CREATE TABLE IF NOT EXISTS leaderboard (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT,
-    score INTEGER,
-    category TEXT,
-    difficulty TEXT
+pswrd TEXT,
+profile_image TEXT DEFAULT 'default.jpg'
 );
 '''
 # Execute the table creation query
 cur.execute(user_creation_query)
-cur.execute(leaderboard_creation_query)
 
 # ---------TODO------------
 # SCORE TABLE FOR QUIZ
@@ -67,15 +59,13 @@ conn.close()
 def start():
     session['current_user'] = None
     session['logged_in'] = False
-    session['category'] = None
-    session['difficulty'] = None
     return redirect(url_for("login"))
 
 
 @app.route('/home')
 def home():
     flash('Welcome back!')
-    return render_template('index.html')
+    return render_template('index.html', username=session['username'])
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -97,15 +87,15 @@ def login():
             # Authentication successful, redirect to a logged-in page
             session['logged_in'] = True
             session['current_user'] = user[0]
+            session['username'] = user[2]
 
             print(session['logged_in'])
             print(session['current_user'])
-            return redirect(url_for('home', user=session['current_user'], logged_in=session['logged_in']))
+            return redirect(url_for('home', user=session['current_user'], username=session['username'], logged_in=session['logged_in']))
 
-        # Authentication failed, handle this situation (e.g., show an error message)
-        return render_template('login.html', user=session['current_user'], logged_in=session['logged_in'])
-
-    return render_template('login.html', user=session['current_user'], logged_in=session['logged_in'])
+    # If the request method is GET or the authentication failed, handle this situation
+    username = session['username'] if 'username' in session else None
+    return render_template('login.html', user=session['current_user'], username=username, logged_in=session['logged_in'])
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -168,87 +158,66 @@ def latihan():
 
 @app.route('/kuiz')
 def kuiz():
-    return render_template('quizzes.html')
+    return render_template('quizAlg.html')
+
+
+@app.route('/kuizAlg')
+def kuizAlg():
+    return render_template('quizAlg.html')
+
 
 @app.route('/kuizAlgE')
 def kuizAlgE():
-    session['category'] = "Algebra"
-    session['difficulty'] = "Senang"
     return render_template('quizAlgEasy.html')
+
 
 @app.route('/kuizAlgM')
 def kuizAlgM():
-    session['category'] = "Algebra"
-    session['difficulty'] = "Sederhana"
     return render_template('quizAlgMed.html')
+
 
 @app.route('/kuizAlgH')
 def kuizAlgH():
-    session['category'] = "Algebra"
-    session['difficulty'] = "Susah"
     return render_template('quizAlgHard.html')
 
-@app.route('/kuizUnitE')
-def kuizUnitE():
-    session['category'] = "Pengukuran Asas"
-    session['difficulty'] = "Senang"
-    return render_template('quizUnitEasy.html')
 
-@app.route('/kuizUnitM')
-def kuizUnitM():
-    session['category'] = "Pengukuran Asas"
-    session['difficulty'] = "Sederhana"
-    return render_template('quizUnitMed.html')
-
-@app.route('/kuizUnitH')
-def kuizUnitH():
-    session['category'] = "Pengukuran Asas"
-    session['difficulty'] = "Susah"
-    return render_template('quizUnitHard.html')
-
-@app.route('/kuizLeaderboard')
-def kuizLeaderboard():
-    algebra = "Algebra"
-    units = "Pengukuran Asas"
-
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
     conn = create_connection()
     cur = conn.cursor()
 
-    # If the email is not registered, proceed with registration
-        
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" LIMIT 10;')
-    UnitE = cur.fetchall()
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" LIMIT 10;')
-    UnitM = cur.fetchall()
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Susah" LIMIT 10;')
-    UnitH = cur.fetchall()
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" LIMIT 10;')
-    AlgE = cur.fetchall()
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" LIMIT 10;')
-    AlgM = cur.fetchall()
-    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" LIMIT 10;')
-    AlgH = cur.fetchall()
-
-    return render_template('leaderboard.html', UnitE=UnitE, UnitM=UnitM, UnitH=UnitH, AlgE=AlgE, AlgM=AlgM, AlgH=AlgH)
-
-@app.route('/submitScore', methods=['GET', 'POST'])
-def submitScore():
     if request.method == "POST":
-        finalScore = request.form.get("final-score-inp")
+        # Get the updated data from the form
+        fullname = request.form.get("fullname")
+        username = request.form.get("username")
+        password = request.form.get("password")
+        profile_image = request.files.get("profile_image")
 
-        conn = create_connection()
-        cur = conn.cursor()
+        # Save the uploaded image to a directory
+        if profile_image:
+            filename = secure_filename(profile_image.filename)
+            os.makedirs('static/images', exist_ok=True)  # Create the directory if it doesn't exist
+            profile_image.save(os.path.join('static/images', filename))
 
-        # If the email is not registered, proceed with registration
-        cur.execute("INSERT INTO leaderboard (email, score, category, difficulty) VALUES (?, ?, ?, ?)", (session['current_user'], finalScore, session['category'], session['difficulty']))
+            # Update the user's profile image in the database
+            cur.execute("UPDATE user SET profile_image=? WHERE email=?", (filename, session['current_user']))
+            conn.commit()
+
+        # Update the user's data in the database
+        cur.execute("UPDATE user SET fullname=?, username=?, pswrd=? WHERE email=?", (fullname, username, password, session['current_user']))
         conn.commit()
 
-        session['category'] = None
-        session['difficulty'] = None
-        return redirect(url_for("kuiz"))
+        # Update the username in the session
+        session['username'] = username
 
-    return redirect(url_for("kuiz"))
-    
+    # Fetch the user's data from the database
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+
+    # Pass the user's data to the template
+    return render_template('profile.html', user=user)
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
