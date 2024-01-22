@@ -330,8 +330,11 @@ def kuizLeaderboard():
     AlgM = cur.fetchall()
     cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 10;')
     AlgH = cur.fetchall()
+    
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
 
-    return render_template('leaderboard.html', UnitE=UnitE, UnitM=UnitM, UnitH=UnitH, AlgE=AlgE, AlgM=AlgM, AlgH=AlgH)
+    return render_template('leaderboard.html', username=session['username'], user=user, UnitE=UnitE, UnitM=UnitM, UnitH=UnitH, AlgE=AlgE, AlgM=AlgM, AlgH=AlgH)
 
 
 @app.route('/submitScore', methods=['GET', 'POST'])

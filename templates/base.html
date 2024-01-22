@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -35,132 +36,136 @@
 </head>
 
 <body>
-<!-- ? Preloader Start -->
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="../static/img/logo/icon.png" alt="">
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="../static/img/logo/icon.png" alt="">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Preloader Start -->
-<!-- Header Start -->
-<div class="header-area header-transparent">
-    <div class="main-header ">
-        <div class="header-bottom  header-sticky">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Logo -->
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="logo">
-                            <a href="/"><img src="../static/img/logo/Silent_Genius.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li class="active"><a href="/home">Home</a></li>
-                                        <li><a href="/pengajaran">Pengajaran</a>
-                                            <ul class="submenu">
-                                                <li><a href="/ukuran_asas">Pengukuran Asas</a></li>
-                                                <li><a href="/faktor_algebra">Pemfaktoran & Algebra</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/latihan">Latihan</a></li>
-                                        <li><a href="/kuiz">Kuiz</a></li>
-
-                                        <!-- Profile image -->
-                                        <li>
-                                            <a href="/profile">
-                                                {% if user %}
-                                                    <img src="{{ url_for('static', filename='images/' + user[4]) }}" alt="Profile" class="profile-image">
-                                                {% endif %}
-
-                                            </a>
-                                        </li>
-                                        <li><a href="{{ url_for('logout') }}" class="btn">Log Keluar</a></li>
-                                    </ul>
-                                </nav>
+    <!-- Preloader Start -->
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header ">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="/"><img src="../static/img/logo/Silent_Genius.png" alt=""></a>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li class="active"><a href="/home">Home</a></li>
+                                            <li><a href="/pengajaran">Pengajaran</a>
+                                                <ul class="submenu">
+                                                    <li><a href="/ukuran_asas">Pengukuran Asas</a></li>
+                                                    <li><a href="/faktor_algebra">Pemfaktoran & Algebra</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="/latihan">Latihan</a></li>
+                                            <li><a href="/kuiz">Kuiz</a></li>
 
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
+                                            <!-- Profile image -->
+                                            <li>
+                                                <a href="/profile">
+                                                    {% if user %}
+                                                    <img src="{{ url_for('static', filename='images/' + user[4]) }}"
+                                                        alt="Profile" class="profile-image">
+                                                    {% endif %}
+
+                                                </a>
+                                            </li>
+                                            <li><a href="{{ url_for('logout') }}" class="btn">Log Keluar</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Header End -->
+    <!-- Header End -->
 
 
 
-{% block content %}
-    <!-- This is where the content from child templates will be inserted -->
-{% endblock %}
+    <main>
+        <div id="mascot"></div>
 
-<footer>
-    <div class="footer-wrappper footer-bg">
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-30">
-                                <!-- logo -->
-                                <div class="footer-logo mb-25">
-                                    <a href="/"><img
-                                            src="../static/img/logo/Silent_Genius.png" alt=""></a>
+        {% block content %}
+        <!-- This is where the content from child templates will be inserted -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-wrappper footer-bg">
+            <!-- Footer Start-->
+            <div class="footer-area footer-padding">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="single-footer-caption mb-30">
+                                    <!-- logo -->
+                                    <div class="footer-logo mb-25">
+                                        <a href="/"><img src="../static/img/logo/Silent_Genius.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Pengajaran</h4>
+                                    <ul>
+                                        <li><a href="/ukuran_asas">Jom Belajar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Latihan</h4>
+                                    <ul>
+                                        <li><a href="#">Jom buat Latihan</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Kuiz</h4>
+                                    <ul>
+                                        <li><a href="#">Jom buat Kuiz</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Pengajaran</h4>
-                                <ul>
-                                    <li><a href="/ukuran_asas">Jom Belajar</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Latihan</h4>
-                                <ul>
-                                    <li><a href="#">Jom buat Latihan</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Kuiz</h4>
-                                <ul>
-                                    <li><a href="#">Jom buat Kuiz</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-</footer>
+        </div>
+    </footer>
 </body>
 <!-- Scroll Up -->
 <div id="back-top">

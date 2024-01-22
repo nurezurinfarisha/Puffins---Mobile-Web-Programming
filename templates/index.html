@@ -2,96 +2,92 @@
 
 {% block content %}
 
-    <main>
 
-        {% include 'mascot.html' %}
-        
-        <!--? slider Area Start-->
-        <section class="slider-area">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <div class="single-slider slider-height d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-7 col-lg-7 col-md-12">
-                                <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay="0.2s">Selamat Datang<br>{{ username }}!</h1>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Courses area start -->
-        <div class="courses-area section-padding40 fix">
+<!--? slider Area Start-->
+<section class="slider-area">
+    <div class="slider-active">
+        <!-- Single Slider -->
+        <div class="single-slider slider-height d-flex align-items-center">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8">
-                        <div class="section-tittle text-center mb-55">
-                            <h2 class="mb-4">Jom Terokai</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="courses-actives">
-                    <!-- Single -->
-                    <div class="properties pb-20">
-                        <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="/pengajaran"><img src="../static/img/gallery/ajar.png" alt=""></a>
-                            </div>
-                            <div class="properties__caption">
-                                <p>Pengajaran</p>
-                                <h3><a href="/pengajaran">Mari Belajar!</a></h3>
-                                <p>Terdapat dua tajuk yang amat seronok untuk and pelajari iaitu <strong>Pengukuran Asas</strong> dan
-                                    <strong>Pemfaktoran & Algebra.</strong>
-
-                                </p>
-                                <a href="/pengajaran" class="border-btn border-btn2">Mula</a>
-                            </div>
+                <div class="row">
+                    <div class="col-xl-7 col-lg-7 col-md-12">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInLeft" data-delay="0.2s">Selamat Datang<br>{{ username }}!</h1>
 
                         </div>
                     </div>
-                    <!-- Single -->
-                    <!-- Single -->
-                    <div class="properties pb-20">
-                        <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="/latihan"><img src="../static/img/gallery/latihan.png" alt=""></a>
-                            </div>
-                            <div class="properties__caption">
-                                <p>Latihan</p>
-                                <h3><a href="/latihan">Jom buat latihan</a></h3>
-                                <p>Terdapat banyak latihan yang boleh dilakukan untuk mengukuhkan pengetahuan anda!
-                                </p>
-                                <a href="/latihan" class="border-btn border-btn2">Mula</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <!-- Single -->
-                    <div class="properties pb-20">
-                        <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="/kuiz"><img src="../static/img/gallery/kuiz.png" alt=""></a>
-                            </div>
-                            <div class="properties__caption">
-                                <p>Kuiz</p>
-                                <h3><a href="/kuiz">Jom main kuiz</a></h3>
-                                <p>Mari mencabar minda anda dengan bermain kuiz dengan beberapa tingkat kesusahan!
-
-                                </p>
-                                <a href="/kuiz" class="border-btn border-btn2">Mula</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Single -->
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-    </main>
+<!-- Courses area start -->
+<div class="courses-area section-padding40 fix">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-8">
+                <div class="section-tittle text-center mb-55">
+                    <h2 class="mb-4">Jom Terokai</h2>
+                </div>
+            </div>
+        </div>
+        <div class="courses-actives">
+            <!-- Single -->
+            <div class="properties pb-20">
+                <div class="properties__card">
+                    <div class="properties__img overlay1">
+                        <a href="/pengajaran"><img src="../static/img/gallery/ajar.png" alt=""></a>
+                    </div>
+                    <div class="properties__caption">
+                        <p>Pengajaran</p>
+                        <h3><a href="/pengajaran">Mari Belajar!</a></h3>
+                        <p>Terdapat dua tajuk yang amat seronok untuk and pelajari iaitu <strong>Pengukuran
+                                Asas</strong> dan
+                            <strong>Pemfaktoran & Algebra.</strong>
+
+                        </p>
+                        <a href="/pengajaran" class="border-btn border-btn2">Mula</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Single -->
+            <!-- Single -->
+            <div class="properties pb-20">
+                <div class="properties__card">
+                    <div class="properties__img overlay1">
+                        <a href="/latihan"><img src="../static/img/gallery/latihan.png" alt=""></a>
+                    </div>
+                    <div class="properties__caption">
+                        <p>Latihan</p>
+                        <h3><a href="/latihan">Jom buat latihan</a></h3>
+                        <p>Terdapat banyak latihan yang boleh dilakukan untuk mengukuhkan pengetahuan anda!
+                        </p>
+                        <a href="/latihan" class="border-btn border-btn2">Mula</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single -->
+            <!-- Single -->
+            <div class="properties pb-20">
+                <div class="properties__card">
+                    <div class="properties__img overlay1">
+                        <a href="/kuiz"><img src="../static/img/gallery/kuiz.png" alt=""></a>
+                    </div>
+                    <div class="properties__caption">
+                        <p>Kuiz</p>
+                        <h3><a href="/kuiz">Jom main kuiz</a></h3>
+                        <p>Mari mencabar minda anda dengan bermain kuiz dengan beberapa tingkat kesusahan!
+
+                        </p>
+                        <a href="/kuiz" class="border-btn border-btn2">Mula</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Single -->
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -142,11 +142,13 @@ function doWhenCorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "green";
     getScore();
+    generateMascot("Wah! Terbaik!", "Focus!!!");
 }
 
 function doWhenIncorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "#fb3640";
+    generateMascot("Alaaa~", "Focus!!!");
     // console.log("wrong");
 }
 

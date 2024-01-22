@@ -17,10 +17,16 @@ table {
     width: 100%;
 }
 
+.leaderboard-table{
+    width: 300px;
+}
+
 th,
 td {
     text-align: left;
     padding: 8px;
+    border-bottom: 1px solid #373737;
+    text-align: center;
 }
 
 tr:nth-child(even) {
