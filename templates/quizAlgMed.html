@@ -64,10 +64,16 @@
                         </div>
                     </div>
                     <div id="end-game">
-                        <h1>&#128515</h1>
-                        <h1>Your total score was : <span id="final-score">0</span> / 1000</h1>
-                        <p id="message"></p>
-                        <a id="restart-btn" onclick="restart()">PLAY AGAIN</a>
+                        <form action="{{url_for('submitScore')}}" method="POST">
+                            <h1>&#128515</h1>
+                            <h1>Your total score was : <span id="final-score">0</span> / 1000</h1>
+                            <input type="hidden" id = "final-score-inp" name="final-score-inp" value="0">
+                            <p id="message"></p>
+                            <div class="form-input pt-30">
+                                <input type="submit" name="submit" value="submitScore">
+                            </div>
+                            <a id="restart-btn" onclick="restart()">PLAY AGAIN</a>
+                        </form>
                     </div>
                 </div>
             

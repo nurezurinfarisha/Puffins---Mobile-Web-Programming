@@ -1,82 +1,86 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <main>
-        {% include 'mascot.html' %}
-        <!--? slider Area Start-->
-        <section class="slider-area slider-area2">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <div class="single-slider slider-height2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-11 col-md-12">
-                                <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Kuiz</h1>
-                                    <!-- breadcrumb Start-->
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="#">kuiz</a></li>
-                                        </ol>
-                                    </nav>
-                                    <!-- breadcrumb End -->
-                                </div>
+<main>
+    {% include 'mascot.html' %}
+    <!--? slider Area Start-->
+    <section class="slider-area slider-area2">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-11 col-md-12">
+                            <div class="hero__caption hero__caption2">
+                                <h1 data-animation="bounceIn" data-delay="0.2s">Kuiz</h1>
+                                <!-- breadcrumb Start-->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">kuiz</a></li>
+                                    </ol>
+                                </nav>
+                                <!-- breadcrumb End -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!--? About Area-1 Start -->
-        <section class="about-area1 fix pt-10" style="padding: 50px;">
-            <div class="support-wrapper align-items-center" style="display: flex; justify-content: center; align-items: center;">
+        </div>
+    </section>
+    <!--? About Area-1 Start -->
+    <section class="about-area1 fix pt-10" style="padding: 50px;">
+        <div class="support-wrapper align-items-center"
+            style="display: flex; justify-content: center; align-items: center;">
 
-                <div class="quizcontainer">
-                    <div id="start-game">
-                        <h1>Welcome to Maths Quiz game.</h1>
-                        <p>Press the button below to start the game</p>
-                        <a id="start-btn" onclick="restart()">LET'S PLAY</a>
-                    </div>
-                    <div id="in-game">
-                        <div class="top-section">
-                            <h1>Maths Game</h1>
-                            <div class="game-data">
-                                <p>Question :
-                                    <span id="Qno">0</span>/10
-                                </p>
-                                <p>Score: <span id="score">0</span></p>
-                            </div>
-                            <div id="timer">
-                                <div id="progress"></div>
-                            </div>
+            <div class="quizcontainer">
+                <div id="start-game">
+                    <h1>Selamat datang {{user}} ke Quiz <div id="cat">Algebra</div>(<div id="diff">Susah</div>)</h1>
+                    <p>Press the button below to start the game</p>
+                    <a id="start-btn" onclick="restart()">LET'S PLAY</a>
+                </div>
+                <div id="in-game">
+                    <div class="top-section">
+                        <h1>Maths Game</h1>
+                        <div class="game-data">
+                            <p>Question :
+                                <span id="Qno">0</span>/10
+                            </p>
+                            <p>Score: <span id="score">0</span></p>
                         </div>
-                        <div class="question-card">
-                            <h1 id="question">This is question</h1>
-                        </div>
-                        <h3>Choose correct one: </h3>
-                        <div class="answer-card">
-                            <button class="quiz">Option A</button>
-                            <button class="quiz">Option B</button>
-                            <button class="quiz">Option C</button>
-                            <button class="quiz">Option D</button>
+                        <div id="timer">
+                            <div id="progress"></div>
                         </div>
                     </div>
-                    <div id="end-game">
+                    <div class="question-card">
+                        <h1 id="question">This is question</h1>
+                    </div>
+                    <h3>Choose correct one: </h3>
+                    <div class="answer-card">
+                        <button class="quiz">Option A</button>
+                        <button class="quiz">Option B</button>
+                        <button class="quiz">Option C</button>
+                        <button class="quiz">Option D</button>
+                    </div>
+                </div>
+                <div id="end-game">
+                    <form action="{{url_for('submitScore')}}" method="POST">
                         <h1>&#128515</h1>
                         <h1>Your total score was : <span id="final-score">0</span> / 1000</h1>
+                        <input type="hidden" id = "final-score-inp" name="final-score-inp" value="0">
                         <p id="message"></p>
+                        <div class="form-input pt-30">
+                            <input type="submit" name="submit" value="submitScore">
+                        </div>
                         <a id="restart-btn" onclick="restart()">PLAY AGAIN</a>
-                    </div>
+                    </form>
                 </div>
-            
-
             </div>
-        </section>
-        <!-- About Area End -->
-    </main>
-    <script src="../static/js/quizAlgH.js"></script>
+
+
+        </div>
+    </section>
+    <!-- About Area End -->
+</main>
+<script src="../static/js/quizAlgH.js"></script>
 {% endblock %}
-
-

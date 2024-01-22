@@ -9,6 +9,7 @@ let question = document.getElementById("question");
 let buttons = document.getElementsByTagName("button");
 let start = document.getElementById("start-btn");
 let fScore = document.getElementById("final-score");
+let fscoreInp = document.getElementById("final-score-inp")
 let startBox = document.getElementById("start-game");
 let gameBox = document.getElementById("in-game");
 let endBox = document.getElementById("end-game");
@@ -47,6 +48,7 @@ function nextQuestion() {
     // timed();
     fScore.innerHTML = score.innerHTML;
     if (qNo.innerText == "10") {
+        fscoreInp.value = score.innerHTML
         whenFinished();
     }
 

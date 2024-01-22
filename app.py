@@ -37,8 +37,19 @@ username TEXT,
 pswrd TEXT
 );
 '''
+
+leaderboard_creation_query = '''
+CREATE TABLE IF NOT EXISTS leaderboard (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT,
+    score INTEGER,
+    category TEXT,
+    difficulty TEXT
+);
+'''
 # Execute the table creation query
 cur.execute(user_creation_query)
+cur.execute(leaderboard_creation_query)
 
 # ---------TODO------------
 # SCORE TABLE FOR QUIZ
@@ -56,6 +67,8 @@ conn.close()
 def start():
     session['current_user'] = None
     session['logged_in'] = False
+    session['category'] = None
+    session['difficulty'] = None
     return redirect(url_for("login"))
 
 
@@ -155,23 +168,62 @@ def latihan():
 
 @app.route('/kuiz')
 def kuiz():
-    return render_template('quizAlg.html')
-
-@app.route('/kuizAlg')
-def kuizAlg():
-    return render_template('quizAlg.html')
+    return render_template('quizzes.html')
 
 @app.route('/kuizAlgE')
 def kuizAlgE():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Senang"
     return render_template('quizAlgEasy.html')
 
 @app.route('/kuizAlgM')
 def kuizAlgM():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Sederhana"
     return render_template('quizAlgMed.html')
 
 @app.route('/kuizAlgH')
 def kuizAlgH():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Susah"
     return render_template('quizAlgHard.html')
+
+@app.route('/kuizUnitE')
+def kuizUnitE():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Senang"
+    return render_template('quizUnitEasy.html')
+
+@app.route('/kuizUnitM')
+def kuizUnitM():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Sederhana"
+    return render_template('quizUnitMed.html')
+
+@app.route('/kuizUnitH')
+def kuizUnitH():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Susah"
+    return render_template('quizUnitHard.html')
+
+@app.route('/submitScore', methods=['GET', 'POST'])
+def submitScore():
+    if request.method == "POST":
+        finalScore = request.form.get("final-score-inp")
+
+        conn = create_connection()
+        cur = conn.cursor()
+
+        # If the email is not registered, proceed with registration
+        cur.execute("INSERT INTO leaderboard (email, score, category, difficulty) VALUES (?, ?, ?, ?)", (session['current_user'], finalScore, session['category'], session['difficulty']))
+        conn.commit()
+
+        session['category'] = None
+        session['difficulty'] = None
+        return redirect(url_for("kuiz"))
+
+    return redirect(url_for("kuiz"))
+    
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
