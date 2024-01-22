@@ -1,5 +1,10 @@
 let n1;
 let n2;
+let u1Index;
+let u2Index;
+let u1;
+let u2;
+let factor;
 let opSelector;
 let ansOpt;
 let answer;
@@ -10,15 +15,20 @@ let buttons = document.getElementsByTagName("button");
 let start = document.getElementById("start-btn");
 let fScore = document.getElementById("final-score");
 let startBox = document.getElementById("start-game");
-let fscoreInp = document.getElementById("final-score-inp")
 let gameBox = document.getElementById("in-game");
+let fscoreInp = document.getElementById("final-score-inp")
 let endBox = document.getElementById("end-game");
 let progress = document.getElementById("progress");
 let message = document.getElementById("message");
 let operator = ['+', '-', '*', '/'];
-let unknown = ['x', 'y', 'z', 'a', 'b', 'c', 'd'];
+let units = ['length','weight','time'];
+let lengthUnit = ['mm','cm','m','km']
+let lengthFactor = [0.001, 0.01, 1, 1000]
+let weightUnit = ['mg','g','kg','ton']
+let timeUnit = ['saat','minit','jam','hari','minggu','bulan','tahun']
+let timeFactor = [1, 60, 3600, 86400, 604800, 2629800, 31557600]
 let equal = ['=']
-let diffRange = 20;
+let diffRange = 10;
 let timeSet = 500;
 let t;
 
@@ -52,52 +62,56 @@ function nextQuestion() {
         whenFinished();
     }
 
-    do{
-        n1 = Math.floor(Math.random() * diffRange);
-        n2 = Math.floor(Math.random() * diffRange);
-        opSelector = operator[Math.floor(Math.random() * 4)];
-        unkSelector = unknown[Math.floor(Math.random() * 7)];
+        
+    n1 = Math.floor(Math.random() * diffRange);
+    //n2 = Math.floor(Math.random() * diffRange);
+
+    unitSelector = units[Math.floor(Math.random() * 3)]
+
+    if(unitSelector=="length"){
+        do{
+            u1Index = Math.floor(Math.random() * 4)
+            u2Index = Math.floor(Math.random() * 4)
+
+            u1 = lengthUnit[u1Index]
+            u2 = lengthUnit[u2Index]
 
 
-        //Might have to adjust this
-        if (opSelector == "/") {
-            for (let i = 0; i < 200; i++) {
-                if (n1 % n2 == 0 && n1 != 0 && n2 != 0 && n2 != 1 && n1 != n2) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
+            factor = lengthFactor[u1Index]/lengthFactor[u2Index]
+            //factor = Math.pow(10,(u1Index-u2Index))
+        }while(u1Index==u2Index)
 
-        if (opSelector == "*") {
-            for (let i = 0; i < 100; i++) {
-                if (n1 * n2 <= 1000) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
-    
+    }else if(unitSelector=="weight"){
+        do{
+            u1Index = Math.floor(Math.random() * 4)
+            u2Index = Math.floor(Math.random() * 4)
+        
+            u1 = weightUnit[u1Index]
+            u2 = weightUnit[u2Index]
+
+            factor = Math.pow(1000,(u1Index-u2Index))
+        }while(u1Index==u2Index)
+    }else{
+        do{
+            u1Index = Math.floor(Math.random() * 4)
+            u2Index = Math.floor(Math.random() * 4)
+
+            u1 = timeUnit[u1Index]
+            u2 = timeUnit[u2Index]
 
 
-        question.innerHTML = unkSelector + opSelector + n1 + "=" + n2;
+            factor = timeFactor[u1Index]/timeFactor[u2Index]
+            //factor = Math.pow(10,(u1Index-u2Index))
+        }while(u1Index==u2Index && u1Index<u2Index && (u1Index-u2Index)<3)
+    }
 
-        if(opSelector == "+"){
-            evalOp = "-"
-        }else if(opSelector == "-"){
-            evalOp = "+"
-        }else if(opSelector == "*"){
-            evalOp = "/"
-        }else if(opSelector == "/"){
-            evalOp = "*"
-        }
 
-    }while(!Number.isInteger(eval(n1+evalOp+n2)))
 
-    answer = eval(n2 + evalOp + n1);
-    question.innerHTML = question.innerHTML + "\n Apakah " + unkSelector + "?";
+
+    question.innerHTML = n1 + u1 + " = ____" + u2 
+    console.log(n1 + u1 + " = ____" + u2)
+    console.log(factor)
+    answer = eval(n1 + "*" + factor);
 
     // console.log("answer: " + answer);
     getOptions();
