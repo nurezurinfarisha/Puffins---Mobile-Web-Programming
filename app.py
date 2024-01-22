@@ -41,8 +41,20 @@ pswrd TEXT,
 profile_image TEXT DEFAULT 'default.jpg'
 );
 '''
+
+leaderboard_creation_query = '''
+CREATE TABLE IF NOT EXISTS leaderboard (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT,
+    score INTEGER,
+    category TEXT,
+    difficulty TEXT
+);
+'''
+
 # Execute the table creation query
 cur.execute(user_creation_query)
+cur.execute(leaderboard_creation_query)
 
 # ---------TODO------------
 # SCORE TABLE FOR QUIZ
@@ -212,22 +224,24 @@ def kuiz():
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
     user = cur.fetchone()
-    return render_template('quizAlg.html', username=session['username'], user=user)
+    return render_template('quizzes.html', username=session['username'], user=user)
 
 
-@app.route('/kuizAlg')
-@login_required
-def kuizAlg():
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
-    user = cur.fetchone()
-    return render_template('quizAlg.html', username=session['username'], user=user)
+# @app.route('/kuizAlg')
+# @login_required
+# def kuizAlg():
+#     conn = create_connection()
+#     cur = conn.cursor()
+#     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+#     user = cur.fetchone()
+#     return render_template('quizAlg.html', username=session['username'], user=user)
 
 
 @app.route('/kuizAlgE')
 @login_required
 def kuizAlgE():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Senang"
     conn = create_connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
@@ -238,6 +252,8 @@ def kuizAlgE():
 @app.route('/kuizAlgM')
 @login_required
 def kuizAlgM():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Sederhana"
     conn = create_connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
@@ -248,13 +264,95 @@ def kuizAlgM():
 @app.route('/kuizAlgH')
 @login_required
 def kuizAlgH():
+    session['category'] = "Algebra"
+    session['difficulty'] = "Susah"
     conn = create_connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
     user = cur.fetchone()
     return render_template('quizAlgHard.html', username=session['username'], user=user)
 
+@app.route('/kuizUnitE')
+def kuizUnitE():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Senang"
+    
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    
+    return render_template('quizUnitEasy.html', username=session['username'], user=user)
 
+@app.route('/kuizUnitM')
+def kuizUnitM():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Sederhana"
+    
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    
+    return render_template('quizUnitMed.html', username=session['username'], user=user)
+
+@app.route('/kuizUnitH')
+def kuizUnitH():
+    session['category'] = "Pengukuran Asas"
+    session['difficulty'] = "Susah"
+    
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    
+    return render_template('quizUnitHard.html', username=session['username'], user=user)
+
+@app.route('/kuizLeaderboard')
+def kuizLeaderboard():
+    algebra = "Algebra"
+    units = "Pengukuran Asas"
+
+    conn = create_connection()
+    cur = conn.cursor()
+
+    # If the email is not registered, proceed with registration
+        
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 10;')
+    UnitE = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 10;')
+    UnitM = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 10;')
+    UnitH = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 10;')
+    AlgE = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 10;')
+    AlgM = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 10;')
+    AlgH = cur.fetchall()
+
+    return render_template('leaderboard.html', UnitE=UnitE, UnitM=UnitM, UnitH=UnitH, AlgE=AlgE, AlgM=AlgM, AlgH=AlgH)
+
+
+@app.route('/submitScore', methods=['GET', 'POST'])
+def submitScore():
+    if request.method == "POST":
+        finalScore = request.form.get("final-score-inp")
+
+        conn = create_connection()
+        cur = conn.cursor()
+
+        # If the email is not registered, proceed with registration
+        cur.execute("INSERT INTO leaderboard (email, score, category, difficulty) VALUES (?, ?, ?, ?)", (session['current_user'], finalScore, session['category'], session['difficulty']))
+        conn.commit()
+
+        session['category'] = None
+        session['difficulty'] = None
+        return redirect(url_for("kuizLeaderboard"))
+
+    return redirect(url_for("kuiz"))
+    
+    
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():

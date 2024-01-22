@@ -12,6 +12,7 @@
 }
 
 table {
+    padding: 20px;
     border-collapse: collapse;
     width: 100%;
 }
@@ -27,6 +28,6 @@ tr:nth-child(even) {
 }
 
 th {
-    background-color: #04AA6D;
+    background-color: #9404aa;
     color: white;
 }
