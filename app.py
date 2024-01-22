@@ -206,6 +206,23 @@ def kuizUnitH():
     session['difficulty'] = "Susah"
     return render_template('quizUnitHard.html')
 
+@app.route('/kuizLeaderboard', methods=['GET', 'POST'])
+def kuizLeaderboard():
+    
+    if request.method == "POST":
+        conn = create_connection()
+        cur = conn.cursor()
+
+        # If the email is not registered, proceed with registration
+        cur.execute("INSERT INTO leaderboard (email, score, category, difficulty) VALUES (?, ?, ?, ?)", (session['current_user'], finalScore, session['category'], session['difficulty']))
+        conn.commit()
+
+        session['category'] = None
+        session['difficulty'] = None
+        return redirect(url_for("kuiz"))
+    
+    return redirect('leaderboard.html')
+
 @app.route('/submitScore', methods=['GET', 'POST'])
 def submitScore():
     if request.method == "POST":
