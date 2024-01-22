@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/quiz.css">
     <link rel="stylesheet" href="../static/css/mascot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -63,7 +65,12 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li class="active"><a href="/home">Home</a></li>
-                                        <li><a href="/pengajaran">Pengajaran</a></li>
+                                        <li><a href="/pengajaran">Pengajaran</a>
+                                            <ul class="submenu">
+                                                <li><a href="/ukuran_asas">Pengukuran Asas</a></li>
+                                                <li><a href="/faktor_algebra">Pemfaktoran & Algebra</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="/latihan">Latihan</a></li>
                                         <li><a href="/kuiz">Kuiz</a></li>
                                         <li class="button-header margin-left "><a href="{{ url_for('logout') }}"

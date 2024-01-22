@@ -135,7 +135,7 @@ body {
 h1,h2,h3,h4,h5,h6 {
     font-family: "Josefin Sans",sans-serif;
     color: #4255A4;
-    margin-top: 0px;
+    margin-top: 0;
     font-style: normal;
     font-weight: 400;
     text-transform: normal
@@ -7605,4 +7605,19 @@ ol, li {
     height: 90%; /* Height adjusted for modal content */
     border: none; /* Remove border */
     margin-top: 30px; /* Add margin at the top to push it down */
+}
+
+h2.mb-4 {
+    font-family: 'Tangerine', cursive; /* Replace with the name of the font you chose */
+    font-size: 80px;
+}
+
+h2.mb-4a {
+    font-family: 'Tangerine', cursive; /* Replace with the name of the font you chose */
+    font-size: 70px;
+}
+
+h3.mb-4 {
+    font-family: 'Tangerine', cursive; /* Replace with the name of the font you chose */
+    font-size: 40px;
 }
