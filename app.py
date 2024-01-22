@@ -206,22 +206,30 @@ def kuizUnitH():
     session['difficulty'] = "Susah"
     return render_template('quizUnitHard.html')
 
-@app.route('/kuizLeaderboard', methods=['GET', 'POST'])
+@app.route('/kuizLeaderboard')
 def kuizLeaderboard():
-    
-    if request.method == "POST":
-        conn = create_connection()
-        cur = conn.cursor()
+    algebra = "Algebra"
+    units = "Pengukuran Asas"
 
-        # If the email is not registered, proceed with registration
-        cur.execute("INSERT INTO leaderboard (email, score, category, difficulty) VALUES (?, ?, ?, ?)", (session['current_user'], finalScore, session['category'], session['difficulty']))
-        conn.commit()
+    conn = create_connection()
+    cur = conn.cursor()
 
-        session['category'] = None
-        session['difficulty'] = None
-        return redirect(url_for("kuiz"))
-    
-    return redirect('leaderboard.html')
+    # If the email is not registered, proceed with registration
+        
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" LIMIT 10;')
+    UnitE = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" LIMIT 10;')
+    UnitM = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Susah" LIMIT 10;')
+    UnitH = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" LIMIT 10;')
+    AlgE = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" LIMIT 10;')
+    AlgM = cur.fetchall()
+    cur.execute('SELECT leaderboard.score, user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" LIMIT 10;')
+    AlgH = cur.fetchall()
+
+    return render_template('leaderboard.html', UnitE=UnitE, UnitM=UnitM, UnitH=UnitH, AlgE=AlgE, AlgM=AlgM, AlgH=AlgH)
 
 @app.route('/submitScore', methods=['GET', 'POST'])
 def submitScore():

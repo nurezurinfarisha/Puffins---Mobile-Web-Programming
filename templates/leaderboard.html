@@ -36,38 +36,114 @@
         <div class="support-wrapper align-items-center"
             style="display: flex; justify-content: center; align-items: center;">
             <div class="flex-container" style="justify-content: center;">
-                <div class="flex-container" style="justify-content: center;">
-                    <div>
-                        <a href="/kuizLeaderboard" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Leaderboard</a>
-                    </div>
-                </div>
-                <div class="flex-container" style="justify-content: center;">
+
+                <!-- Set 2 rows for 2 types of topic -->
+                <div class="leaderboard-row">
+
                     <div>
                         <h1>Algebra</h1>
                     </div>
-                    <div>
-                        <a href="/kuizAlgE" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Senang</a>
-                        <a href="/kuizAlgM" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Sederhanal</a>
-                        <a href="/kuizAlgH" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s">Susah</a>
+                    <!-- Algebra Colums -->
+                    <div class="leaderboard-column">
+                        <!-- Split to 3 columns -->
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in AlgE %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in AlgM %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in AlgH %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
                     </div>
-                </div>
-                <br>
-                <br>
-                <div class="flex-container" style="justify-content: center;">
+
                     <div>
-                        <h1>Penukaran Unit</h1>
+                        <h1>Pengukuran Asas</h1>
                     </div>
-                    <div>
-                        <a href="/kuizUnitE" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Senang</a>
-                        <a href="/kuizUnitM" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Sederhanal</a>
-                        <a href="/kuizUnitH" class="btn hero-btn" data-animation="fadeInLeft"
-                            data-delay="0.7s">Susah</a>
+                    <!-- Standard Unit Colums -->
+                    <div class="leaderboard-column">
+                        <!-- Split to 3 columns -->
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in UnitE %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in UnitM %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Skor</th>
+                                </tr>
+                                {% for record in UnitH %}
+                                <tr>
+                                    <td>{{record.1}}</td>
+                                    <td>{{record.0}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
                     </div>
+
+
+
                 </div>
 
             </div>
