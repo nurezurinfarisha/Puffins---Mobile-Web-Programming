@@ -134,49 +134,84 @@ def register():
 @app.route('/pengajaran')
 def pengajaran():
     flash('Jom Belajar!')
-    return render_template('pengajaran.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('pengajaran.html', username=session['username'], user=user)
 
 
 @app.route('/ukuran_asas')
 def ukuran_asas():
     flash('Apakah Itu Ukuran Asas?')
-    return render_template('ukuran_asas.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('ukuran_asas.html', username=session['username'], user=user)
 
 
 @app.route('/faktor_algebra')
 def faktor_algebra():
     flash('Y+3=10. Apakah Y?')
-    return render_template('faktor_algebra.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('faktor_algebra.html', username=session['username'], user=user)
 
 
 @app.route('/latihan')
 def latihan():
-    return render_template('latihan.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('latihan.html', username=session['username'], user=user)
 
 
 @app.route('/kuiz')
 def kuiz():
-    return render_template('quizAlg.html')
-
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('quizAlg.html', username=session['username'], user=user)
 
 @app.route('/kuizAlg')
 def kuizAlg():
-    return render_template('quizAlg.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('quizAlg.html', username=session['username'], user=user)
 
 
 @app.route('/kuizAlgE')
 def kuizAlgE():
-    return render_template('quizAlgEasy.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('quizAlgEasy.html', username=session['username'], user=user)
 
 
 @app.route('/kuizAlgM')
 def kuizAlgM():
-    return render_template('quizAlgMed.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('quizAlgMed.html', username=session['username'], user=user)
 
 
 @app.route('/kuizAlgH')
 def kuizAlgH():
-    return render_template('quizAlgHard.html')
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    return render_template('quizAlgHard.html', username=session['username'], user=user)
 
 
 @app.route('/profile', methods=['GET', 'POST'])
