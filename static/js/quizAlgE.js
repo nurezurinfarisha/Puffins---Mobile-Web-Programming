@@ -220,13 +220,13 @@ function doWhenCorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "green";
     getScore();
-    generateMascot("Wah! Terbaik!", "Focus!!!");
+    generateMascot("Wah! Terbaik!", "Focus!!!", 8);
 }
 
 function doWhenIncorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "#fb3640";
-    generateMascot("Alaaa~", "Focus!!!");
+    generateMascot("Alaaa~", "Focus!!!", 4);
     // console.log("wrong");
 }
 

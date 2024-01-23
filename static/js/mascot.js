@@ -3,16 +3,16 @@
 // let html = generateMascot(message, popmessage);
 // document.getElementById('yourElementId').innerHTML = html;
 
-function generateMascot(message, popMessage){
-    html = generateMascotHTML(message, popMessage);
+function generateMascot(message, popMessage, mascotNo){
+    html = generateMascotHTML(message, popMessage, mascotNo);
     document.getElementById('mascot').innerHTML = html;
 }
 
-function generateMascotHTML(message, popMessage) {
+function generateMascotHTML(message, popMessage, mascotNo) {
     return `
     <div class="mascot mascot-animation">
         <a title="mascot mascot-animation" href="#" onclick="popAlert('${popMessage}')">
-            <img src="../static/img/mascot/2.png" alt="Mascot" width="100px" height="100px">
+            <img src="../static/img/mascot/${mascotNo}.png" alt="Mascot" width="100px" height="100px">
         </a>
         <div class="talk-bubble tri-left round right-in" height="100px" style="background-color: beige;">
             <div class="talktext">
@@ -27,7 +27,7 @@ function popAlert(popmessage){
     alert(popmessage);
 }
 
-function showMessageBasedOnPage() {
+function showMessageBasedOnPage(mascotNo) {
     let path = window.location.pathname;
     let message, popMessage;
 
@@ -42,9 +42,9 @@ function showMessageBasedOnPage() {
         popMessage = "";
     }
 
-    let html = generateMascotHTML(message, popMessage);
+    let html = generateMascotHTML(message, popMessage, mascotNo);
     document.getElementById('mascot').innerHTML = html;
 }
 
 // Call the function when the page loads
-window.onload = showMessageBasedOnPage;
+window.onload = showMessageBasedOnPage();
