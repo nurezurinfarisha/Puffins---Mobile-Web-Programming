@@ -84,9 +84,6 @@ def home():
     return render_template('index.html', username=session['username'], user=user)
 
 
-from flask_login import UserMixin
-
-
 class User(UserMixin):
     def __init__(self, email, fullname, username, pswrd, profile_image='default.jpg'):
         self.id = email
@@ -135,7 +132,9 @@ def login():
 
     # If the request method is GET or the authentication failed, handle this situation
     username = session['username'] if 'username' in session else None
-    return render_template('login.html', user=session['current_user'], username=username, logged_in=session['logged_in'])
+    current_user = session['current_user'] if 'current_user' in session else None
+    logged_in = session['logged_in'] if 'logged_in' in session else False
+    return render_template('login.html', user=current_user, username=username, logged_in=logged_in)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -143,7 +142,7 @@ def logout():
     session['current_user'] = None
     session['logged_in'] = False
     logout_user()
-    return redirect(url_for("login"))
+    return redirect(url_for("landing"))
 
 
 @app.route('/register', methods=['GET', 'POST'])
