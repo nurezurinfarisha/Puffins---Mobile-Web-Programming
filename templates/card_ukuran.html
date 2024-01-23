@@ -41,13 +41,17 @@
     }
 
     function nextImage() {
-      currentImageIndex = currentImageIndex + 2;
-      updateImage();
+      if (currentImageIndex < 8) {
+        currentImageIndex = currentImageIndex + 2;
+        updateImage();
+      }
     }
 
     function prevImage() {
-      currentImageIndex = currentImageIndex - 2;
-      updateImage();
+      if (currentImageIndex > 2) {
+        currentImageIndex = currentImageIndex - 2;
+        updateImage();
+      }
     }
 
     function flipCard() {

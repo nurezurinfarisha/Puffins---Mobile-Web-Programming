@@ -1,141 +1,144 @@
 {% extends "base.html" %}
 
-{% block content %} 
+{% block content %}
 
 
-        <style>
-            #imageContainer {
-              text-align: center;
-            }
+<style>
+  #imageContainer {
+    text-align: center;
+  }
 
-            #displayedImage {
-              max-width: 100%;
-              max-height: 400px;
-            }
+  #displayedImage {
+    max-width: 100%;
+    max-height: 400px;
+  }
 
-            .buttonContainer {
-              margin-top: 20px;
-              text-align: center;
-            }
+  .buttonContainer {
+    margin-top: 20px;
+    text-align: center;
+  }
 
-            button {
-              padding: 10px;
-              margin: 0 5px;
-              cursor: pointer;
-            }
-        </style>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const imageContainer = document.getElementById('imageContainer');
-                        const displayedImage = document.getElementById('displayedImage');
-                        const nextButton = document.getElementById('nextButton');
-                        const prevButton = document.getElementById('prevButton');
-                        const flipButton = document.getElementById('flipButton');
+  button {
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const imageContainer = document.getElementById('imageContainer');
+    const displayedImage = document.getElementById('displayedImage');
+    const nextButton = document.getElementById('nextButton');
+    const prevButton = document.getElementById('prevButton');
+    const flipButton = document.getElementById('flipButton');
 
-                        let currentImageIndex = 1;
-                        const totalImages = 10;
-
-
-                        function updateImage() {
-                            displayedImage.src = `/static/img/flashcard/algebra/${currentImageIndex}.png`;
-                        }
-
-                        function nextImage() {
-                            currentImageIndex = currentImageIndex + 2;
-                            updateImage(); 
-                        }
-
-                          function prevImage() {
-                            currentImageIndex = currentImageIndex - 2;
-                            updateImage();
-                        }
-
-                        function flipCard() {
-                            if ((currentImageIndex % 2) != 0) {
-                                currentImageIndex = currentImageIndex + 1;
-                                 updateImage();
-                            }else{
-                                currentImageIndex = currentImageIndex -1;
-                                 updateImage();
-                            }     
-                        }
+    let currentImageIndex = 1;
+    const totalImages = 10;
 
 
-                        nextButton.addEventListener('click', nextImage);
-                        prevButton.addEventListener('click', prevImage);
-                        flipButton.addEventListener('click', flipCard);
+    function updateImage() {
+      displayedImage.src = `/static/img/flashcard/algebra/${currentImageIndex}.png`;
+    }
 
-                        // Initial image display
-                        updateImage();
-                    });
-                </script>
+    function nextImage() {
+      if (currentImageIndex < 8) {
+        currentImageIndex = currentImageIndex + 2;
+        updateImage();
+      }
+    }
 
-        <!--? slider Area Start-->
-        <section class="slider-area slider-area2">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <div class="single-slider slider-height2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-11 col-md-12">
-                                <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Latihan Pemfaktoran & Algebra</h1>
-                                    <!-- breadcrumb Start-->
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/home">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="/latihan">Latihan</a></li>
-                                        </ol>
-                                    </nav>
-                                    <!-- breadcrumb End -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    function prevImage() {
+      if (currentImageIndex > 2) {
+        currentImageIndex = currentImageIndex - 2;
+        updateImage();
+      }
+    }
+
+    function flipCard() {
+      if ((currentImageIndex % 2) != 0) {
+        currentImageIndex = currentImageIndex + 1;
+        updateImage();
+      } else {
+        currentImageIndex = currentImageIndex - 1;
+        updateImage();
+      }
+    }
+
+
+    nextButton.addEventListener('click', nextImage);
+    prevButton.addEventListener('click', prevImage);
+    flipButton.addEventListener('click', flipCard);
+
+    // Initial image display
+    updateImage();
+  });
+</script>
+
+<!--? slider Area Start-->
+<section class="slider-area slider-area2">
+  <div class="slider-active">
+    <!-- Single Slider -->
+    <div class="single-slider slider-height2">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8 col-lg-11 col-md-12">
+            <div class="hero__caption hero__caption2">
+              <h1 data-animation="bounceIn" data-delay="0.2s">Latihan Pemfaktoran & Algebra</h1>
+              <!-- breadcrumb Start-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/latihan">Latihan</a></li>
+                </ol>
+              </nav>
+              <!-- breadcrumb End -->
             </div>
-        </section>
-
-        <!-- Courses Area -->
-        <div class="courses-area section-padding40 fix" style="height: 200vh;">
-           <div class="container">
-             <div class="row justify-content-center">
-               <div class="col-xl-9 col-lg-10">
-                 <!-- Flashcard Section -->
-                 <div class="swiper-container">
-                   <div class="swiper-wrapper">
-
-                     <!-- Flashcard items go here -->
-                     <div class="swiper-slide">
-                       <div class="flashcard">
-
-                         <!-- Add more flashcard items as needed -->
-                        <div id="imageContainer"> <!-- This is container-->
-                            <img  id = "displayedImage" alt="Image">
-                        </div>
-                         </div>
-                       </div>
-                     </div>
-
-                 <!-- Swiper Navigation Buttons -->
-
-            <div class="buttonContainer">
-              <button class="btn" id="prevButton">Prev</button>
-              <button class="btn" id="nextButton">Next</button>
-              <button class="btn" id="flipButton">FLIP CARD</button>
-            </div>
-
-            </div>
-            
-           </div>
+          </div>
         </div>
-     </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <style>
-        
+<!-- Courses Area -->
+<div class="courses-area section-padding40 fix" style="height: 200vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-9 col-lg-10">
+        <!-- Flashcard Section -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
 
-    </style>
+            <!-- Flashcard items go here -->
+            <div class="swiper-slide">
+              <div class="flashcard">
+
+                <!-- Add more flashcard items as needed -->
+                <div id="imageContainer"> <!-- This is container-->
+                  <img id="displayedImage" alt="Image">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Swiper Navigation Buttons -->
+
+          <div class="buttonContainer">
+            <button class="btn" id="prevButton">Prev</button>
+            <button class="btn" id="nextButton">Next</button>
+            <button class="btn" id="flipButton">FLIP CARD</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+
+</style>
 
 {% endblock %}

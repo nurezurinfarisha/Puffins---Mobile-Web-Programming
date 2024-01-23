@@ -33,27 +33,27 @@
 
             <div class="quizcontainer">
                 <div id="start-game">
-                    <h1>Quiz Algebra (Susah)</h1>
-                        <p>Tekan butang di bawah untuk mula main!</p>
-                    <a id="start-btn" onclick="restart()">LET'S PLAY</a>
+                    <h1>Quiz Pemfaktoran Algebra (Susah)</h1>
+                    <p>Tekan butang di bawah untuk mula main!</p>
+                    <a id="start-btn" onclick="restart()">MAIN</a>
                 </div>
                 <div id="in-game">
                     <div class="top-section">
-                        <h1>Maths Game</h1>
+                        <h1>Pemfaktoran & Algebra</h1>
                         <div class="game-data">
-                            <p>Question :
+                            <p>Soalan :
                                 <span id="Qno">0</span>/10
                             </p>
-                            <p>Score: <span id="score">0</span></p>
+                            <p>Skor: <span id="score">0</span></p>
                         </div>
                         <div id="timer">
                             <div id="progress"></div>
                         </div>
                     </div>
                     <div class="question-card">
-                        <h1 id="question">This is question</h1>
+                        <h1 id="question">Ini adalah Soalan</h1>
                     </div>
-                    <h3>Choose correct one: </h3>
+                    <h3>Pilih jawapan yang betul: </h3>
                     <div class="answer-card">
                         <button class="quiz">Option A</button>
                         <button class="quiz">Option B</button>
@@ -64,13 +64,15 @@
                 <div id="end-game">
                     <form action="{{url_for('submitScore')}}" method="POST">
                         <h1>&#128515</h1>
-                        <h1>Your total score was : <span id="final-score">0</span> / 1000</h1>
+                        <h1>Skor anda adalah : <span id="final-score">0</span> / 1000</h1>
                         <input type="hidden" id = "final-score-inp" name="final-score-inp" value="0">
                         <p id="message"></p>
                         <div class="form-input pt-30">
-                            <input type="submit" name="submit" value="submitScore">
+                            <input type="submit" class="btn hero-btn" data-animation="fadeInLeft"
+                            data-delay="0.7s" name="submit" value="Hantar Skor Anda!">
                         </div>
-                        <a id="restart-btn" onclick="restart()">PLAY AGAIN</a>
+                        <br>
+                        <a id="restart-btn" onclick="restart()">CUBA LAGI</a>
                     </form>
                 </div>
             </div>
