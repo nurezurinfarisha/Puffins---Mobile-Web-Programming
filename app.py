@@ -215,6 +215,28 @@ def latihan():
     user = cur.fetchone()
     return render_template('latihan.html', username=session['username'], user=user)
 
+#region Ezu Card
+
+@app.route('/card_algebra')
+def card_algebra():
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    # flash('Mari cuba soalan Algebra!')
+    return render_template('card_algebra.html', username=session['username'], user=user)
+
+@app.route('/card_ukuran')
+def card_ukuran():
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
+    user = cur.fetchone()
+    # flash('Mari cuba soalan Pengukuran Asas!')
+    return render_template('card_ukuran.html', username=session['username'], user=user)
+
+#endregion
+
 
 @app.route('/kuiz')
 @login_required

@@ -1,0 +1,36 @@
+.flashcard {
+  perspective: 1000px;
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flashcard:hover .card {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Add this CSS code to your existing styles or in a separate stylesheet */
+.card-front img,
+.card-back img {
+    max-width: 60%; /* Set the maximum width to 100% of the parent container */
+    max-height: 60%; /* Set the maximum height to 100% of the parent container */
+    display: block; /* Remove any extra spacing below the image */
+    margin: auto; /* Center the image within its container */
+}
