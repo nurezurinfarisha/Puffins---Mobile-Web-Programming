@@ -9,16 +9,144 @@ let question = document.getElementById("question");
 let buttons = document.getElementsByTagName("button");
 let start = document.getElementById("start-btn");
 let fScore = document.getElementById("final-score");
-let fscoreInp = document.getElementById("final-score-inp")
 let startBox = document.getElementById("start-game");
 let gameBox = document.getElementById("in-game");
+let fscoreInp = document.getElementById("final-score-inp")
 let endBox = document.getElementById("end-game");
 let progress = document.getElementById("progress");
 let message = document.getElementById("message");
-let operator = ['+', '-', '*', '/'];
-let unknown = ['x', 'y', 'z', 'a', 'b', 'c', 'd'];
-let equal = ['=']
-let diffRange = 50;
+
+let Question = [
+    "6x^2 - 19x + 9",
+    "5y^2 + 16y + 16",
+    "3m^2 - 14m + 8",
+    "2a^2 + 7a + 3",
+    "4x^2 - 25",
+    "4x^2 + 13x + 6",
+    "9y^2 - 30y + 25",
+    "6m^2 - 17m + 9",
+    "a^2 + 10a + 25",
+    "5x^2 - 30x + 45",
+    "3x^2 - 17x + 10",
+    "4y^2 + 21y + 20",
+    "5m^2 - 12m + 7",
+    "2a^2 + 9a + 7",
+    "9x^2 - 64",
+    "6x^2 - 7x + 1",
+    "5y^2 - 9y - 4",
+    "8m^2 + 14m + 6",
+    "3a^2 - 10a + 7",
+    "7x^2 - 24x + 16",
+    "(2x^2 - 3)(2x + 1)",
+    "(y^2 - 2y + 1)(y^2 + 1)",
+    "(a^2 + 4a + 4)(a - 2)",
+    "(3x^2 - 2)(x^2 + 5)",
+    "(5y^2 + 3)(y^2 - 4)",
+    "(m^2 + 7m + 10)(m^2 - 2m - 5)",
+    "(x^2 - 3x - 4)(x^2 + 6x + 8)",
+    "(4p^2 - 2p + 1)(2p - 1)",
+    "(2q^2 + 5q + 3)(3q^2 - 2q + 1)",
+    "(b^2 + 7b + 10)(b^2 - 4b - 5)",
+    "(x^3 - 2x^2 + 4x - 8)(x^2 + 2x + 4)",
+    "(y^3 + 2y^2 - 4y + 8)(y^2 - 2y + 4)",
+    "(4m^3 - 2m^2 + 1)(m^2 + 2m + 1)",
+    "(x^2 - 4)(x^2 - 9)",
+    "(25z^2 - 4)(z^2 + 1)",
+    "(a^2 + 2a + 1)(a^2 - 2a + 1)",
+    "(9p^3 - 6p^2 + 1)(3p - 1)",
+    "(x^3 + 8)(x^3 - 8)",
+    "(2y^3 - 4y^2 + 8y - 16)(y^2 + 4y + 16)",
+    "(c^3 + 2c^2 + 1)(c^2 - c + 1)"
+];
+let Ans = [
+    "(2x - 3)(3x - 3)",
+    "(5y + 4)(y + 4)",
+    "(3m - 2)(m - 4)",
+    "(2a + 1)(a + 3)",
+    "(2x - 5)(2x + 5)",
+    "(2x + 3)(2x + 2)",
+    "(3y - 5)^2",
+    "(2m - 3)(3m - 3)",
+    "(a + 5)^2",
+    "5(x - 3)^2",
+    "(3x - 2)(x - 5)",
+    "(4y + 5)(y + 4)",
+    "(5m - 4)(m - 3)",
+    "(2a + 7)(a + 1)",
+    "(3x - 8)(3x + 8)",
+    "(3x - 1)(2x - 1)",
+    "(5y + 4)(y - 1)",
+    "(2m + 3)(4m + 2)",
+    "(3a - 7)(a - 1)",
+    "(7x - 8)(x - 2)",
+    "4x^3 - 3x^2 - 2x + 1",
+    "y^4 - 1",
+    "a^3 + 2a^2 - 7a - 8",
+    "3x^4 + 11x^2 + 10",
+    "5y^4 - 21y^2 + 12",
+    "m^4 + 3m^3 - 23m^2 + 20m + 50",
+    "x^4 + 3x^3 - 30x^2 - 64x - 32",
+    "8p^3 - 12p^2 + 3p - 1",
+    "6q^4 - 15q^3 - 16q^2 + 33q + 3",
+    "b^4 - 3b^2 - 70",
+    "x^5 - 2x^4 + 10x^3 - 38x^2 + 88x - 128",
+    "y^5 - 6y^4 + 22y^3 - 76y^2 + 176y - 256",
+    "4m^5 - 4m^4 - 5m^3 - 33m^2 + 26m + 25",
+    "x^4 - 13x^2 + 36",
+    "25z^4 + 20z^2 + 4",
+    "a^4 + 2a^2 + 1",
+    "9p^4 - 12p^3 + 4p^2 - 4p + 1",
+    "x^6 - 64",
+    "2y^5 - 6y^4 + 20y^3 - 76y^2 + 212y - 384",
+    "c^5 + 2c^4 - 4c^3 + 8c^2 - 16c + 16"
+];
+let Opt = [
+    ["(3x - 3)(2x - 3)", "(6x - 1)(x - 9)", "(2x - 3)^2"],
+    ["(4y + 4)(y + 5)", "(5y + 2)(y + 4)", "(y + 5)(4y + 5)"],
+    ["(m - 2)(3m - 4)", "(m + 2)(3m - 4)", "(3m - 2)(m - 4)"],
+    ["(2a - 1)(a + 3)", "(a + 1)(2a + 3)", "(a + 3)(2a + 1)"],
+    ["(3x + 2)(x + 5)", "(3x - 2)(2x - 5)", "(2x - 5)(x - 3)"],
+    ["(3x + 3)(2x + 2)", "(4x + 3)(x + 2)", "(2x + 3)(2x + 2)"],
+    ["(4y + 4)(y + 5)", "(5y + 2)(y + 4)", "(y + 5)(4y + 5)"],
+    ["(2m + 1)(3m - 3)", "(6m - 1)(m - 9)", "(3m - 3)(2m - 3)"],
+    ["(a + 5)(a + 5)", "(a + 5)(a + 5)", "(5 + a)^2"],
+    ["(x - 5)(x - 3)", "(5x - 3)^2", "(3x - 5)(x - 3)"],
+    ["(3x + 2)(x + 5)", "(3x - 2)(2x - 5)", "(2x - 5)(x - 3)"],
+    ["(4y + 4)(y + 5)", "(5y + 2)(y + 4)", "(y + 5)(4y + 5)"],
+    ["(5m + 4)(m - 3)", "(m + 4)(5m - 3)", "(5m - 4)(m - 3)"],
+    ["(2a - 1)(a + 7)", "(a + 1)(2a + 7)", "(a + 7)(2a + 1)"],
+    ["(3x - 8)(3x + 8)", "(8 - 3x)(8 + 3x)", "(3x + 8)(3x + 8)"],
+    ["(3x - 1)(2x - 1)", "(3x + 1)(2x - 1)", "(2x - 1)(3x - 1)"],
+    ["(5y + 1)(y - 4)", "(4y - 1)(5y + 4)", "(y - 1)(5y + 4)"],
+    ["(2m + 2)(4m + 3)", "(2m + 3)(4m + 1)", "(2m + 3)(2m + 1)"],
+    ["(3a - 7)(a - 1)", "(3a + 7)(a - 1)", "(7a - 3)(3a - 1)"],
+    ["(7x - 8)(x + 2)", "(7x + 8)(x - 2)", "(2x - 8)(7x + 1)"],
+    ["4x^3 - 3x^2 - 2x + 1", "(2x - 3)(2x + 1)", "2x^3 - 3(2x^2 - x - 2)"],
+    ["y^4 - 1", "(y - 1)(y^3 + y^2 + y + 1)", "y(y^3 - 2y^2 + 2y - 1)"],
+    ["a^3 + 2a^2 - 7a - 8", "(a^2 - 2)(a - 4)", "a^3 - 2(a^2 - 2a - 5)"],
+    ["3x^4 + 11x^2 + 10", "(3x^2 - 2)(x^2 + 5)", "3(2x^2 - 3)(x^2 + 2)"],
+    ["5y^4 - 21y^2 + 12", "(5y^2 - 2)(y^2 + 6)", "5(y^2 - 2)(y^2 + 1)"],
+    ["m^4 + 3m^3 - 23m^2 + 20m + 50", "(m^2 + 5)(m^2 - 2m - 5)", "m^2(m^3 + 3m^2 - 23m + 20)"],
+    ["x^4 + 3x^3 - 30x^2 - 64x - 32", "(x^2 + 4)(x^2 - 8)", "(x + 1)(x^4 + 2x^3 - 26x^2 - 38x - 32)"],
+    ["8p^3 - 12p^2 + 3p - 1", "(4p^2 - 2p + 1)(2p - 1)", "4(p - 1)(2p^2 + 2p + 1)"],
+    ["6q^4 - 15q^3 - 16q^2 + 33q + 3", "(2q + 3)(3q^2 - 5q - 1)", "(3q - 1)(2q^3 - q^2 - 4q + 3)"],
+    ["b^4 - 3b^2 - 70", "(b^2 + 10)(b^2 - 5b - 5)", "(b - 2)(b^4 + 13b^3 - 2b^2 - 13b - 25)"],
+    ["x^5 - 2x^4 + 10x^3 - 38x^2 + 88x - 128", "(x^2 - 2)(x^3 + 2x^2 - 6x - 64)", "(x - 4)(x^4 + 2x^3 - 6x^2 - 38x - 32)"],
+    ["y^5 - 6y^4 + 22y^3 - 76y^2 + 176y - 256", "y(y^4 + 6y^3 - 2y^2 - 20y - 16)", "(y^2 + 4)(y^3 - 4y^2 + 4y - 24)"],
+    ["4m^5 - 4m^4 - 5m^3 - 33m^2 + 26m + 25", "(2m - 1)(2m^4 - 2m^3 - 3m^2 - 15m - 25)", "(2m^2 - 1)(2m^3 + 2m^2 - m - 25)"],
+    ["x^4 - 13x^2 + 36", "(x^2 - 4)(x^2 - 9)", "x^2(x - 6)(x + 6)"],
+    ["25z^4 + 20z^2 + 4", "(5z^2 + 2)^2", "(5z^2 - 2z + 2)(5z^2 + 2z + 2)"],
+    ["a^4 + 2a^2 + 1", "(a^2 - a + 1)^2", "(a + 1)(a^3 - 2a^2 + a - 1)"],
+    ["9p^4 - 12p^3 + 4p^2 - 4p + 1", "(3p - 1)(3p^3 - 3p^2 + p - 1)", "(3p^2 - 2p + 1)^2"],
+    ["x^6 - 64", "(x^2 - 4)(x^4 + 4x^2 + 16)", "(x^2 + 4)(x^4 - 4x^2 + 16)"],
+    ["2y^5 - 6y^4 + 20y^3 - 76y^2 + 212y - 384", "2(y - 4)(y^4 + 4y^3 - 2y^2 - 12y - 96)", "2(y^2 + 4)(y^3 - 4y^2 + 4y - 24)"],
+    ["c^5 + 2c^4 - 4c^3 + 8c^2 - 16c + 16", "(c^2 - 2c + 4)(c^3 + 4)", "(c - 2)^5"]
+
+];
+
+
+let randQIndex
+
 let timeSet = 500;
 let t;
 
@@ -52,52 +180,10 @@ function nextQuestion() {
         whenFinished();
     }
 
-    do{
-        n1 = Math.floor(Math.random() * diffRange);
-        n2 = Math.floor(Math.random() * diffRange);
-        opSelector = operator[Math.floor(Math.random() * 4)];
-        unkSelector = unknown[Math.floor(Math.random() * 7)];
-
-
-        //Might have to adjust this
-        if (opSelector == "/") {
-            for (let i = 0; i < 200; i++) {
-                if (n1 % n2 == 0 && n1 != 0 && n2 != 0 && n2 != 1 && n1 != n2) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
-
-        if (opSelector == "*") {
-            for (let i = 0; i < 100; i++) {
-                if (n1 * n2 <= 1000) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
+    randQIndex = Math.floor(Math.random() * 40)
     
-
-
-        question.innerHTML = unkSelector + opSelector + n1 + "=" + n2;
-
-        if(opSelector == "+"){
-            evalOp = "-"
-        }else if(opSelector == "-"){
-            evalOp = "+"
-        }else if(opSelector == "*"){
-            evalOp = "/"
-        }else if(opSelector == "/"){
-            evalOp = "*"
-        }
-
-    }while(!Number.isInteger(eval(n1+evalOp+n2)))
-
-    answer = eval(n2 + evalOp + n1);
-    question.innerHTML = question.innerHTML + "\n Apakah " + unkSelector + "?";
+    answer = Ans[randQIndex];
+    question.innerHTML = "Apakah" + Question[randQIndex] + "?";
 
     // console.log("answer: " + answer);
     getOptions();
@@ -110,20 +196,12 @@ function nextQuestion() {
 // }
 
 function getOptions() {
+    
 
     for (let i = 0; i < 4; i++ && i != ansOpt) {
-        if (answer > 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.4);
-        } else if (answer > 30 && answer < 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.6);
-        } else {
-            buttons[i].innerHTML = Math.floor(Math.random() * 100);
-        }
-
-        if (answer < 0) {
-            buttons[i].innerHTML = "-" + buttons[i].innerHTML;
-        }
+        buttons[i].innerHTML = Opt[randQIndex][Math.floor(Math.random() * 3)]
     }
+    
     ansOpt = Math.floor(Math.random() * 4);
     buttons[ansOpt].innerHTML = answer;
 }
@@ -142,11 +220,13 @@ function doWhenCorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "green";
     getScore();
+    generateMascot("Wah! Terbaik!", "Focus!!!");
 }
 
 function doWhenIncorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "#fb3640";
+    generateMascot("Alaaa~", "Focus!!!");
     // console.log("wrong");
 }
 

@@ -15,10 +15,138 @@ let fscoreInp = document.getElementById("final-score-inp")
 let endBox = document.getElementById("end-game");
 let progress = document.getElementById("progress");
 let message = document.getElementById("message");
-let operator = ['+', '-', '*', '/'];
-let unknown = ['x', 'y', 'z', 'a', 'b', 'c', 'd'];
-let equal = ['=']
-let diffRange = 10;
+
+let Question = [
+    "x^2 - 4",
+    "y^2 - 9",
+    "a^2 - 16",
+    "2x^2 - 8",
+    "3y^2 - 12y",
+    "m^2 - 25",
+    "x^2 + 6x + 9",
+    "4p^2 - 16",
+    "9q^2 - 36",
+    "b^2 - 25",
+    "x^2 - 10x + 25",
+    "y^2 + 8y + 16",
+    "4m^2 - 64",
+    "x^2 - 2x + 1",
+    "25z^2 - 100",
+    "a^2 + 5a + 6",
+    "9p^2 - 54p + 81",
+    "x^2 + 4x + 4",
+    "16y^2 - 64",
+    "c^2 - 9",
+    "(x + 3)^2",
+    "(y - 4)(y + 4)",
+    "(a + 2)(a + 5)",
+    "2(x - 1)",
+    "(3y - 2)^2",
+    "(m + 3)^2",
+    "(x + 1)(x + 4)",
+    "(4p - 2)",
+    "(3q + 1)(3q - 1)",
+    "(b - 3)^2",
+    "(x + 2)(x + 2)",
+    "(y + 3)^2",
+    "4(m - 1)",
+    "(x - 2)^2",
+    "(5z - 1)(5z + 1)",
+    "(a - 1)(a + 2)",
+    "(9p + 3)^2",
+    "(x + 1)^2",
+    "(2y - 4)",
+    "(c + 2)^2"
+];
+let Ans = [
+    "(x + 2)(x - 2)",
+    "(y + 3)(y - 3)",
+    "(a + 4)(a - 4)",
+    "2(x + 2)(x - 2)",
+    "3y(y - 4)",
+    "(m + 5)(m - 5)",
+    "(x + 3)^2",
+    "4(p + 2)(p - 2)",
+    "3(q + 2)(q - 2)",
+    "(b + 5)(b - 5)",
+    "(x - 5)^2",
+    "(y + 4)^2",
+    "4(m + 8)(m - 8)",
+    "(x - 1)^2",
+    "25(z + 2)(z - 2)",
+    "(a + 2)(a + 3)",
+    "9(p - 3)^2",
+    "(x + 2)^2",
+    "4(y + 4)(y - 4)",
+    "(c + 3)(c - 3)",
+    "x^2 + 6x + 9",
+    "y^2 - 16",
+    "a^2 + 7a + 10",
+    "2x - 2",
+    "9y^2 - 12y + 4",
+    "m^2 + 6m + 9",
+    "x^2 + 5x + 4",
+    "4p - 2",
+    "9q^2 - 1",
+    "b^2 - 6b + 9",
+    "x^2 + 4x + 4",
+    "y^2 + 6y + 9",
+    "4m - 4",
+    "x^2 - 4x + 4",
+    "25z^2 - 1",
+    "a^2 + a - 2",
+    "81p^2 + 54p + 9",
+    "x^2 + 2x + 1",
+    "4y - 8",
+    "c^2 + 4c + 4"
+]
+let Opt = [
+    ["(x - 2)(x + 2)", "(2x - 4)", "(x^2 + 4)"],
+    ["(y - 3)(y + 3)", "(y + 9)", "(3y - 1)(3y + 1)"],
+    ["(a - 4)(a + 4)", "(a + 16)", "(a - 8)(a + 8)"],
+    ["2(x - 2)(x + 2)", "2x(x - 2)", "2(x + 2)"],
+    ["3(y + 4)", "(y - 4)(3y - 1)", "(3y - 4)(3y + 1)"],
+    ["(m - 5)(m + 5)", "(5 - m)(5 + m)", "(m - 3)(m + 3)"],
+    ["(x + 3)", "(x + 3)(x + 3)", "(x + 3)^3"],
+    ["4(p - 2)(p + 2)", "(2p)^2", "(p + 2)^2"],
+    ["3(q - 2)(q + 2)", "(q - 6)(q + 6)", "(3q)^2"],
+    ["(b - 5)(b + 5)", "(b + 25)", "(5 - b)(5 + b)"],
+    ["(x - 5)(x - 5)", "(x + 5)(x + 5)", "(5 - x)(5 + x)"],
+    ["(y + 4)(y + 4)", "(y + 4)^2", "(4y + 4)(y + 4)"],
+    ["4(m - 8)(m + 8)", "(2m + 8)(2m - 8)", "(m + 8)^2"],
+    ["(x - 1)(x - 1)", "(x - 1)^2", "(1 - x)^2"],
+    ["25(z - 2)(z + 2)", "(5z)^2", "(z + 2)^2"],
+    ["(a + 2)(a + 3)", "(a + 2)(a + 3)^2", "(a + 3)^2"],
+    ["9(p - 3)(p - 3)", "(3p)^2", "(p - 3)^2"],
+    ["(x - 2)(x + 2)", "(x + 2)^2", "(2x)^2"],
+    ["4(y + 4)", "(y + 4)(y + 4)^2", "(4y)^2"],
+    ["(c - 3)(c + 3)", "(3c)^2", "(c + 3)^2"],
+    ["x^2 + 9", "(x + 3)(x + 3)", "(x + 3)^3"],
+    ["y^2 - 16", "(y - 4)^2", "y^2 + 16"],
+    ["a^2 + 7a + 10", "(a + 2)(a + 5)", "a^2 + 2a + 5a + 10"],
+    ["2x - 2", "(x - 1)^2", "2(x - 1)"],
+    ["9y^2 - 12y + 4", "(3y - 2)(3y - 2)", "9(y - 2)^2"],
+    ["m^2 + 6m + 9", "(m + 3)^2", "m^2 + 3m + 3m + 9"],
+    ["x^2 + 5x + 4", "(x + 1)(x + 4)", "x^2 + 4x + 4"],
+    ["4p - 2", "2(2p - 1)", "(2p - 1)^2"],
+    ["9q^2 - 1", "(3q - 1)^2", "9q^2 + 1"],
+    ["b^2 - 6b + 9", "(b - 3)^2", "b^2 + 3b + 9"],
+    ["x^2 + 4x + 4", "(x + 2)(x + 2)", "(x + 2)^2"],
+    ["y^2 + 6y + 9", "(y + 3)^2", "y^2 - 3y + 9"],
+    ["4m - 4", "2(2m - 2)", "(2m - 2)^2"],
+    ["x^2 - 4x + 4", "(x - 2)^2", "x^2 + 2x + 4"],
+    ["25z^2 - 1", "(5z - 1)(5z + 1)", "25z^2 + 1"],
+    ["a^2 + a - 2", "(a - 1)(a + 2)", "a^2 - 2^2"],
+    ["81p^2 + 54p + 9", "(9p + 3)^2", "9(9p^2 + 6p + 1)"],
+    ["x^2 + 2x + 1", "(x + 1)^2", "x^2 - 1"],
+    ["4y - 8", "2(2y - 4)", "(2y - 4)^2"],
+    ["c^2 + 4c + 4", "(c + 2)^2", "c^2 + 2c + 4"]
+];
+
+
+
+let randQIndex
+
 let timeSet = 500;
 let t;
 
@@ -52,52 +180,10 @@ function nextQuestion() {
         whenFinished();
     }
 
-    do{
-        n1 = Math.floor(Math.random() * diffRange);
-        n2 = Math.floor(Math.random() * diffRange);
-        opSelector = operator[Math.floor(Math.random() * 4)];
-        unkSelector = unknown[Math.floor(Math.random() * 7)];
-
-
-        //Might have to adjust this
-        if (opSelector == "/") {
-            for (let i = 0; i < 200; i++) {
-                if (n1 % n2 == 0 && n1 != 0 && n2 != 0 && n2 != 1 && n1 != n2) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
-
-        if (opSelector == "*") {
-            for (let i = 0; i < 100; i++) {
-                if (n1 * n2 <= 1000) {
-                    break;
-                }
-                n1 = Math.floor(Math.random() * diffRange);
-                n2 = Math.floor(Math.random() * diffRange);
-            }
-        }
+    randQIndex = Math.floor(Math.random() * 40)
     
-
-
-        question.innerHTML = unkSelector + opSelector + n1 + "=" + n2;
-
-        if(opSelector == "+"){
-            evalOp = "-"
-        }else if(opSelector == "-"){
-            evalOp = "+"
-        }else if(opSelector == "*"){
-            evalOp = "/"
-        }else if(opSelector == "/"){
-            evalOp = "*"
-        }
-
-    }while(!Number.isInteger(eval(n1+evalOp+n2)))
-
-    answer = eval(n2 + evalOp + n1);
-    question.innerHTML = question.innerHTML + "\n Apakah " + unkSelector + "?";
+    answer = Ans[randQIndex];
+    question.innerHTML = "Apakah" + Question[randQIndex] + "?";
 
     // console.log("answer: " + answer);
     getOptions();
@@ -110,20 +196,12 @@ function nextQuestion() {
 // }
 
 function getOptions() {
+    
 
     for (let i = 0; i < 4; i++ && i != ansOpt) {
-        if (answer > 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.4);
-        } else if (answer > 30 && answer < 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.6);
-        } else {
-            buttons[i].innerHTML = Math.floor(Math.random() * 100);
-        }
-
-        if (answer < 0) {
-            buttons[i].innerHTML = "-" + buttons[i].innerHTML;
-        }
+        buttons[i].innerHTML = Opt[randQIndex][Math.floor(Math.random() * 3)]
     }
+    
     ansOpt = Math.floor(Math.random() * 4);
     buttons[ansOpt].innerHTML = answer;
 }

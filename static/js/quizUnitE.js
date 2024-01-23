@@ -30,6 +30,8 @@ let timeFactor = [1, 60, 3600, 86400, 604800, 2629800, 31557600]
 let equal = ['=']
 let diffRange = 10;
 let timeSet = 500;
+let questionType;
+let diffUnitRange = 2;
 let t;
 
 function restart() {
@@ -69,6 +71,7 @@ function nextQuestion() {
     unitSelector = units[Math.floor(Math.random() * 3)]
 
     if(unitSelector=="length"){
+        questionType = "length"
         do{
             u1Index = Math.floor(Math.random() * 4)
             u2Index = Math.floor(Math.random() * 4)
@@ -79,9 +82,10 @@ function nextQuestion() {
 
             factor = lengthFactor[u1Index]/lengthFactor[u2Index]
             //factor = Math.pow(10,(u1Index-u2Index))
-        }while(u1Index==u2Index)
+        }while(!(u1Index!=u2Index && (u1Index-u2Index)<diffUnitRange && (u2Index-u1Index)>(-1*diffUnitRange)))
 
     }else if(unitSelector=="weight"){
+        questionType = "weight"
         do{
             u1Index = Math.floor(Math.random() * 4)
             u2Index = Math.floor(Math.random() * 4)
@@ -90,9 +94,10 @@ function nextQuestion() {
             u2 = weightUnit[u2Index]
 
             factor = Math.pow(1000,(u1Index-u2Index))
-        }while(u1Index==u2Index)
+        }while(!(u1Index!=u2Index && (u1Index-u2Index)<diffUnitRange && (u2Index-u1Index)>(-1*diffUnitRange)))
     }else{
         do{
+            questionType="time"
             u1Index = Math.floor(Math.random() * 4)
             u2Index = Math.floor(Math.random() * 4)
 
@@ -102,7 +107,7 @@ function nextQuestion() {
 
             factor = timeFactor[u1Index]/timeFactor[u2Index]
             //factor = Math.pow(10,(u1Index-u2Index))
-        }while(u1Index==u2Index && u1Index<u2Index && (u1Index-u2Index)<3)
+        }while(!(u1Index!=u2Index && u1Index>u2Index && (u1Index-u2Index)<diffUnitRange))
     }
 
 
@@ -112,6 +117,9 @@ function nextQuestion() {
     console.log(n1 + u1 + " = ____" + u2)
     console.log(factor)
     answer = eval(n1 + "*" + factor);
+    if(decimalCheck(answer)){
+        answer = parseFloat(answer).toFixed(5)
+    }
 
     // console.log("answer: " + answer);
     getOptions();
@@ -123,20 +131,41 @@ function nextQuestion() {
 //     if(n1)
 // }
 
+// function getOptions() {
+
+//     for (let i = 0; i < 4; i++ && i != ansOpt) {
+//         if (answer > 100) {
+//             buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.4);
+//         } else if (answer > 30 && answer < 100) {
+//             buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.6);
+//         } else {
+//             buttons[i].innerHTML = Math.floor(Math.random() * 100);
+//         }
+
+//         if (answer < 0) {
+//             buttons[i].innerHTML = "-" + buttons[i].innerHTML;
+//         }
+//     }
+//     ansOpt = Math.floor(Math.random() * 4);
+//     buttons[ansOpt].innerHTML = answer;
+// }
+
 function getOptions() {
+    let randFactor, opt
+    if(questionType==="length"){
+        randFactor = [0.01, 0.1, 10, 100]
+    } else if(questionType==="weight"){
+        randFactor = [0.01, 0.1, 10, 100]
+    }else{
+        randFactor = [0.5, 2, 12, 6]
+    }
 
     for (let i = 0; i < 4; i++ && i != ansOpt) {
-        if (answer > 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.4);
-        } else if (answer > 30 && answer < 100) {
-            buttons[i].innerHTML = answer + Math.floor(Math.random() * answer * 0.6);
-        } else {
-            buttons[i].innerHTML = Math.floor(Math.random() * 100);
+        opt = answer * randFactor[Math.floor(Math.random() * 4)]
+        if(decimalCheck(opt)){
+            opt = opt.toFixed(5)
         }
-
-        if (answer < 0) {
-            buttons[i].innerHTML = "-" + buttons[i].innerHTML;
-        }
+        buttons[i].innerHTML = opt
     }
     ansOpt = Math.floor(Math.random() * 4);
     buttons[ansOpt].innerHTML = answer;
@@ -236,3 +265,22 @@ buttons[3].addEventListener('click', () => {
     clearInterval(t);
     outro(3);
 });
+
+function decimalCheck(number) {
+    // Convert the number to a string to easily count decimal places
+    const numberString = number.toString();
+
+    // Check if there is a decimal point in the number
+    if (numberString.includes('.')) {
+        // Extract the decimal part of the number
+        const decimalPart = numberString.split('.')[1];
+
+        // Check if the length of the decimal part is greater than 5
+        if (decimalPart.length > 5) {
+            return true;
+        }
+    }
+
+    // If the number doesn't have a decimal point or has 5 or fewer decimal places, return false
+    return false;
+}
