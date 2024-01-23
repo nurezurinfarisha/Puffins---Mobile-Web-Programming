@@ -424,9 +424,158 @@ def profile():
     # Fetch the user's data from the database
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
     user = cur.fetchone()
+    
+    #----Medal Fetching-----\
+    index = 0
+    medalUnitE = None
+    medalUnitM = None
+    medalUnitH = None
+    medalAlgE = None
+    medalAlgM = None
+    medalAlgH = None
+    
+    #region Alge Easy
+    AlgEStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    AlgEStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    AlgEStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(AlgEStmtn3)
+    AlgE3 = cur.fetchone()
+    cur.execute(AlgEStmtn2)
+    AlgE2 = cur.fetchone()
+    cur.execute(AlgEStmtn1)
+    AlgE1 = cur.fetchone()
+    
+    if(AlgE3):
+        if(AlgE3[0]==session['username']):
+            medalAlgE = "Bronze"
+    if(AlgE2):
+        if(AlgE2[0]==session['username']):
+            medalAlgE = "Silver"
+    if(AlgE1):
+        if(AlgE1[0]==session['username']):
+            medalAlgE = "Gold"
+        
+    #endregion
+            
+    #region Alge Med
+    AlgMStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    AlgMStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    AlgMStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(AlgMStmtn3)
+    AlgM3 = cur.fetchone()
+    cur.execute(AlgMStmtn2)
+    AlgM2 = cur.fetchone()
+    cur.execute(AlgMStmtn1)
+    AlgM1 = cur.fetchone()
+    
+    if(AlgM3):
+        if(AlgM3[0]==session['username']):
+            medalAlgM = "Bronze"
+    if(AlgM2):
+        if(AlgM2[0]==session['username']):
+            medalAlgM = "Silver"
+    if(AlgM1):
+        if(AlgM1[0]==session['username']):
+            medalAlgM = "Gold"
+        
+    #endregion
+    
+    #region Alge Hard
+    AlgHStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    AlgHStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    AlgHStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Susah" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(AlgHStmtn3)
+    AlgH3 = cur.fetchone()
+    cur.execute(AlgHStmtn2)
+    AlgH2 = cur.fetchone()
+    cur.execute(AlgHStmtn1)
+    AlgH1 = cur.fetchone()
+    
+    if(AlgH3):
+        if(AlgH3[0]==session['username']):
+            medalAlgH = "Bronze"
+    if(AlgH2):
+        if(AlgH2[0]==session['username']):
+            medalAlgH = "Silver"
+    if(AlgH1):
+        if(AlgH1[0]==session['username']):
+            medalAlgH = "Gold"
+        
+    #endregion
+    
+    #region unit Easy
+    UnitEStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    UnitEStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    UnitEStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(UnitEStmtn3)
+    UnitE3 = cur.fetchone()
+    cur.execute(UnitEStmtn2)
+    UnitE2 = cur.fetchone()
+    cur.execute(UnitEStmtn1)
+    UnitE1 = cur.fetchone()
+    
+    if(UnitE3):
+        if(UnitE3[0]==session['username']):
+            medalUnitE = "Bronze"
+    if(UnitE2):
+        if(AlgE2[0]==session['username']):
+            medalUnitE = "Silver"
+    if(UnitE1):
+        if(UnitE1[0]==session['username']):
+            medalUnitE = "Gold"
+        
+    #endregion
+            
+    #region unit Med
+    UnitMStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    UnitMStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    UnitMStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Sederhana" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(UnitMStmtn3)
+    UnitM3 = cur.fetchone()
+    cur.execute(UnitMStmtn2)
+    UnitM2 = cur.fetchone()
+    cur.execute(UnitMStmtn1)
+    UnitM1 = cur.fetchone()
+    
+    if(UnitM3):
+        if(UnitM3[0]==session['username']):
+            medalUnitM = "Bronze"
+    if(UnitM2):
+        if(UnitM2[0]==session['username']):
+            medalUnitM = "Silver"
+    if(UnitM1):
+        if(UnitM1[0]==session['username']):
+            medalUnitM = "Gold"
+        
+    #endregion
+    
+    #region unit HArdc
+    UnitHStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
+    UnitHStmtn2 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 1;'
+    UnitHStmtn3 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Pengukuran Asas" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 2;'
+    cur.execute(UnitHStmtn3)
+    UnitH3 = cur.fetchone()
+    cur.execute(UnitHStmtn2)
+    UnitH2 = cur.fetchone()
+    cur.execute(UnitHStmtn1)
+    UnitH1 = cur.fetchone()
+    
+    if(UnitH3):
+        if(UnitH3[0]==session['username']):
+            medalUnitH = "Bronze"
+    if(UnitH2):
+        if(UnitH2[0]==session['username']):
+            medalUnitH = "Silver"
+    if(UnitH1):
+        if(UnitH1[0]==session['username']):
+            medalUnitH = "Gold"
+        
+    #endregion
+    
+
 
     # Pass the user's data to the template
-    return render_template('profile.html', user=user)
+    return render_template('profile.html', user=user, medalAlgE=medalAlgE, medalAlgM=medalAlgM, medalAlgH=medalAlgH, medalUnitE=medalUnitE, medalUnitM=medalUnitM, medalUnitH=medalUnitH)
 
 
 if __name__ == '__main__':

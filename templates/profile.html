@@ -48,13 +48,56 @@
                     <span class="font-weight-bold" id="username">{{ user[2] }}</span>
                     <span class="text-black-50" id="email">{{ user[0] }}</span>
 
-                    {#-------------Medall here--------------#}
+                    <!-- {#-------------Medall here--------------#} -->
                     <span>
-                        <a href="/profile">
-                        {% if user %}
-                            <img src="{{ url_for('static', filename='images/' + user[4]) }}" alt="Profile" class="profile-image">
+                        {% if medalAlgE == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgE == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgE == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
                         {% endif %}
-                        </a>
+
+                        {% if medalAlgM == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgM == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgM == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
+                        {% endif %}
+
+                        {% if medalAlgH == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgH == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalAlgH == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
+                        {% endif %}
+
+                        {% if medalUnitE == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitE == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitE == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
+                        {% endif %}
+
+                        {% if medalUnitE == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitE == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitE == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
+                        {% endif %}
+
+                        {% if medalUnitH == "Gold" %}
+                            <img src="{{ url_for('static', filename='img/mascot/GoldMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitH == "Silver" %}
+                            <img src="{{ url_for('static', filename='img/mascot/SilverMedal.png')}}" alt="Profile" class="profile-image">
+                        {% elif medalUnitH == "Bronze" %}
+                            <img src="{{ url_for('static', filename='img/mascot/BronzeMedal.png')}}" alt="Profile" class="profile-image">
+                        {% endif %}
+                        
                     </span>
                     <span> </span>
                 </div>
