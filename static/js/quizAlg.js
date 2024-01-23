@@ -148,16 +148,16 @@ function lastmessage() {
     clearInterval(t);
     if (fScore.innerText >= 800) {
         let emoji = "&#128525";
-        message.innerHTML = "WOW !! UNBELIEVABLE !!" + emoji;
+        message.innerHTML = "WOW!! TERBAIK!!!" + emoji;
     } else if (fScore.innerText >= 500) {
         let emoji = "&#128531";
-        message.innerHTML = "TOO CLOSE !!" + emoji;
+        message.innerHTML = "CUBAAN YANG BAIK!" + emoji;
     } else if (fScore.innerText >= 100) {
         let emoji = "&#128549";
-        message.innerHTML = "Better luck next time " + emoji;
+        message.innerHTML = "Boleh cuba lagi! " + emoji;
     } else {
         let emoji = "&#128577";
-        message.innerHTML = "Bad Luck " + emoji;
+        message.innerHTML = "Jangan putus asa!" + emoji;
     }
 }
 

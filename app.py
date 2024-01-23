@@ -239,7 +239,7 @@ def card_ukuran():
 
 #endregion
 
-
+#region Quizzes
 @app.route('/kuiz')
 @login_required
 def kuiz():
@@ -248,16 +248,6 @@ def kuiz():
     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
     user = cur.fetchone()
     return render_template('quizzes.html', username=session['username'], user=user)
-
-
-# @app.route('/kuizAlg')
-# @login_required
-# def kuizAlg():
-#     conn = create_connection()
-#     cur = conn.cursor()
-#     cur.execute("SELECT * FROM user WHERE email=?", (session['current_user'],))
-#     user = cur.fetchone()
-#     return render_template('quizAlg.html', username=session['username'], user=user)
 
 
 @app.route('/kuizAlgE')
@@ -390,6 +380,7 @@ def submitScore():
 
     return redirect(url_for("kuiz"))
 
+#endregion
 
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
@@ -433,6 +424,7 @@ def profile():
     medalAlgE = None
     medalAlgM = None
     medalAlgH = None
+   
     
     #region Alge Easy
     AlgEStmtn1 = 'SELECT user.username FROM leaderboard JOIN user ON leaderboard.email = user.email WHERE leaderboard.category = "Algebra" AND leaderboard.difficulty = "Senang" ORDER BY leaderboard.score DESC LIMIT 1 OFFSET 0;'
