@@ -5,7 +5,6 @@ import sqlite3
 from werkzeug.utils import secure_filename
 import os
 from flask_login import LoginManager, login_required, UserMixin, login_user, logout_user
-import uuid
 
 app = Flask(__name__)
 # app.secret_key = 'puffin'
