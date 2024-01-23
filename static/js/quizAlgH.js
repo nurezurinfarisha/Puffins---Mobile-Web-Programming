@@ -220,13 +220,17 @@ function doWhenCorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "green";
     getScore();
-    generateMascot("Wah! Terbaik!", "Focus!!!");
+    let randNum = Math.floor(Math.random() * 3)
+    let encourage = ['Wah!','Bijaknya!','Mantap!']
+    generateMascot(encourage[randNum], "Focus!!!", 8);
 }
 
 function doWhenIncorrect(i) {
     buttons[i].style.color = "#fff";
     buttons[i].style.backgroundColor = "#fb3640";
-    generateMascot("Alaaa~", "Focus!!!");
+    let randNum = Math.floor(Math.random() * 3)
+    let comfort = ['Alaaa~ Tak apa!','Cuba Lagi!','Jangan Risau!']
+    generateMascot(comfort[randNum], "Focus!!!", 4);
     // console.log("wrong");
 }
 
