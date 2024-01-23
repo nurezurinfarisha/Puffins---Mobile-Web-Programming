@@ -218,6 +218,7 @@ def latihan():
 #region Ezu Card
 
 @app.route('/card_algebra')
+@login_required
 def card_algebra():
     conn = create_connection()
     cur = conn.cursor()
@@ -227,6 +228,7 @@ def card_algebra():
     return render_template('card_algebra.html', username=session['username'], user=user)
 
 @app.route('/card_ukuran')
+@login_required
 def card_ukuran():
     conn = create_connection()
     cur = conn.cursor()
